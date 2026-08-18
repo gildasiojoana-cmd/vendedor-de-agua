@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Produtos - Vendedor de Água</title>
+
+    <link rel="stylesheet" href="css/estilo.css">
+
+    <style>
+        .pagina {
+            padding: 18px 14px;
+        }
+
+        .cabecalho-pagina {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .voltar {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 13px;
+            background: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .cabecalho-pagina h2 {
+            font-size: 21px;
+        }
+
+        .cabecalho-pagina p {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .formulario {
+            background: white;
+            padding: 17px;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 18px;
+        }
+
+        .formulario h3 {
+            margin-bottom: 14px;
+            font-size: 17px;
+        }
+
+        .campo {
+            margin-bottom: 12px;
+        }
+
+        .campo label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        .campo input,
+        .campo select {
+            width: 100%;
+            border: 1px solid #dbe3ec;
+            border-radius: 11px;
+            padding: 13px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+        }
+
+        .campo input:focus,
+        .campo select:focus {
+            border-color: #0879d1;
+        }
+
+        .linha {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .botoes-form {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-salvar {
+            flex: 1;
+            border: none;
+            background: #0879d1;
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-cancelar {
+            border: none;
+            background: #e2e8f0;
+            color: #334155;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+        }
+
+        .pesquisa {
+            width: 100%;
+            border: none;
+            background: white;
+            padding: 14px;
+            border-radius: 13px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            outline: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .contador {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        .produto {
+            background: white;
+            border-radius: 17px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .produto-topo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .produto-icone {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: #e0f2fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .produto-nome {
+            flex: 1;
+        }
+
+        .produto-nome strong {
+            display: block;
+            font-size: 15px;
+        }
+
+        .produto-nome small {
+            display: block;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        .preco {
+            font-size: 16px;
+            font-weight: bold;
+            color: #0879d1;
+        }
+
+        .produto-info {
+            margin-top: 12px;
+            padding-top: 11px;
+            border-top: 1px solid #eef2f7;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 9px;
+        }
+
+        .info-box small {
+            display: block;
+            color: #64748b;
+            font-size: 10px;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-top: 3px;
+            font-size: 14px;
+        }
+
+        .estoque-baixo {
+            color: #dc2626 !important;
+        }
+
+        .estoque-normal {
+            color: #16a34a !important;
+        }
+
+        .acoes {
+            display: flex;
+            gap: 7px;
+            margin-top: 12px;
+        }
+
+        .btn-editar,
+        .btn-excluir {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-editar {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .btn-excluir {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .vazio {
+            text-align: center;
+            padding: 35px 15px;
+            color: #94a3b8;
+            background: white;
+            border-radius: 17px;
+        }
+
+        .vazio span {
+            display: block;
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 360px) {
+
+            .linha {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <header class="topo">
+
+        <div class="logo">💧</div>
+
+        <div>
+            <h1>Vendedor de Água</h1>
+            <p>Produtos</p>
+        </div>
+
+    </header>
+
+
+    <main class="pagina">
+
+        <div class="cabecalho-pagina">
+
+            <button
+                class="voltar"
+                onclick="window.location.href='index.html'"
+            >
+                ‹
+            </button>
+
+            <div>
+                <h2>📦 Produtos</h2>
+                <p>Cadastre águas e outros produtos</p>
+            </div>
+
+        </div>
+
+
+        <!-- FORMULÁRIO -->
+
+        <section class="formulario">
+
+            <h3 id="tituloFormulario">
+                ➕ Novo Produto
+            </h3>
+
+            <input
+                type="hidden"
+                id="produtoId"
+            >
+
+
+            <div class="campo">
+
+                <label>Nome do produto *</label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    placeholder="Ex.: Água Mineral 20L"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>Código</label>
+
+                <input
+                    type="text"
+                    id="codigo"
+                    placeholder="Ex.: AGUA20"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>Categoria</label>
+
+                <select id="categoria">
+
+                    <option value="Água">
+                        Água
+                    </option>
+
+                    <option value="Fardo">
+                        Fardo
+                    </option>
+
+                    <option value="Outros">
+                        Outros
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="linha">
+
+                <div class="campo">
+
+                    <label>Preço de venda *</label>
+
+                    <input
+                        type="number"
+                        id="preco"
+                        placeholder="0,00"
+                        step="0.01"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Estoque cheio</label>
+
+                    <input
+                        type="number"
+                        id="estoque"
+                        placeholder="0"
+                        min="0"
+                        step="1"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="linha">
+
+                <div class="campo">
+
+                    <label>Estoque mínimo</label>
+
+                    <input
+                        type="number"
+                        id="estoqueMinimo"
+                        placeholder="0"
+                        min="0"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Controla galão?</label>
+
+                    <select id="controlaGalao">
+
+                        <option value="sim">
+                            Sim
+                        </option>
+
+                        <option value="nao">
+                            Não
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="botoes-form">
+
+                <button
+                    class="btn-salvar"
+                    onclick="salvarProduto()"
+                >
+                    💾 SALVAR PRODUTO
+                </button>
+
+                <button
+                    class="btn-cancelar"
+                    id="btnCancelar"
+                    onclick="cancelarEdicao()"
+                >
+                    CANCELAR
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- PESQUISA -->
+
+        <input
+            type="search"
+            class="pesquisa"
+            id="pesquisa"
+            placeholder="🔎 Pesquisar produto..."
+            oninput="mostrarProdutos()"
+        >
+
+
+        <div
+            class="contador"
+            id="contador"
+        >
+            0 produtos cadastrados
+        </div>
+
+
+        <div id="listaProdutos"></div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const CHAVE_PRODUTOS =
+    "vendedor_agua_produtos";
+
+
+function obterProdutos() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(CHAVE_PRODUTOS)
+        ) || [];
+
+    } catch (erro) {
+
+        return [];
+
+    }
+
+}
+
+
+function salvarProdutos(produtos) {
+
+    localStorage.setItem(
+        CHAVE_PRODUTOS,
+        JSON.stringify(produtos)
+    );
+
+}
+
+
+function moeda(valor) {
+
+    return Number(valor || 0).toLocaleString(
+        "pt-BR",
+        {
+            style: "currency",
+            currency: "BRL"
+        }
+    );
+
+}
+
+
+function limparFormulario() {
+
+    document.getElementById("produtoId").value = "";
+
+    document.getElementById("nome").value = "";
+
+    document.getElementById("codigo").value = "";
+
+    document.getElementById("categoria").value = "Água";
+
+    document.getElementById("preco").value = "";
+
+    document.getElementById("estoque").value = "";
+
+    document.getElementById("estoqueMinimo").value = "";
+
+    document.getElementById("controlaGalao").value = "sim";
+
+
+    document.getElementById(
+        "tituloFormulario"
+    ).textContent = "➕ Novo Produto";
+
+
+    document.querySelector(
+        ".btn-salvar"
+    ).textContent = "💾 SALVAR PRODUTO";
+
+
+    document.getElementById(
+        "btnCancelar"
+    ).style.display = "none";
+
+}
+
+
+function salvarProduto() {
+
+    const nome =
+        document.getElementById("nome")
+        .value
+        .trim();
+
+
+    const codigo =
+        document.getElementById("codigo")
+        .value
+        .trim();
+
+
+    const categoria =
+        document.getElementById("categoria")
+        .value;
+
+
+    const preco =
+        Number(
+            document.getElementById("preco")
+            .value
+        );
+
+
+    const estoque =
+        Number(
+            document.getElementById("estoque")
+            .value
+        ) || 0;
+
+
+    const estoqueMinimo =
+        Number(
+            document.getElementById("estoqueMinimo")
+            .value
+        ) || 0;
+
+
+    const controlaGalao =
+        document.getElementById("controlaGalao")
+        .value;
+
+
+    const id =
+        document.getElementById("produtoId")
+        .value;
+
+
+    if (!nome) {
+
+        alert("Digite o nome do produto.");
+
+        document.getElementById("nome").focus();
+
+        return;
+
+    }
+
+
+    if (!preco || preco <= 0) {
+
+        alert("Digite um preço de venda válido.");
+
+        document.getElementById("preco").focus();
+
+        return;
+
+    }
+
+
+    if (estoque < 0) {
+
+        alert("O estoque não pode ser negativo.");
+
+        return;
+
+    }
+
+
+    const produtos = obterProdutos();
+
+
+    /*
+        VERIFICA CÓDIGO DUPLICADO
+    */
+
+    if (codigo) {
+
+        const codigoDuplicado =
+            produtos.find(produto => {
+
+                return (
+                    produto.codigo &&
+                    produto.codigo.toLowerCase() ===
+                    codigo.toLowerCase() &&
+                    String(produto.id) !== String(id)
+                );
+
+            });
+
+
+        if (codigoDuplicado) {
+
+            alert(
+                "Este código já está cadastrado."
+            );
+
+            document.getElementById("codigo").focus();
+
+            return;
+
+        }
+
+    }
+
+
+    if (id) {
+
+        const indice =
+            produtos.findIndex(
+                produto =>
+                    String(produto.id) === String(id)
+            );
+
+
+        if (indice !== -1) {
+
+            produtos[indice].nome =
+                nome;
+
+            produtos[indice].codigo =
+                codigo;
+
+            produtos[indice].categoria =
+                categoria;
+
+            produtos[indice].preco =
+                preco;
+
+            produtos[indice].estoque =
+                estoque;
+
+            produtos[indice].estoqueMinimo =
+                estoqueMinimo;
+
+            produtos[indice].controlaGalao =
+                controlaGalao;
+
+            produtos[indice].atualizadoEm =
+                new Date().toISOString();
+
+        }
+
+
+        alert(
+            "Produto atualizado com sucesso."
+        );
+
+    } else {
+
+
+        const novoProduto = {
+
+            id: Date.now(),
+
+            nome: nome,
+
+            codigo: codigo,
+
+            categoria: categoria,
+
+            preco: preco,
+
+            estoque: estoque,
+
+            estoqueMinimo: estoqueMinimo,
+
+            controlaGalao: controlaGalao,
+
+            criadoEm:
+                new Date().toISOString(),
+
+            atualizadoEm:
+                new Date().toISOString()
+
+        };
+
+
+        produtos.push(novoProduto);
+
+
+        alert(
+            "Produto cadastrado com sucesso."
+        );
+
+    }
+
+
+    salvarProdutos(produtos);
+
+    limparFormulario();
+
+    mostrarProdutos();
+
+}
+
+
+function editarProduto(id) {
+
+    const produtos =
+        obterProdutos();
+
+
+    const produto =
+        produtos.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
+
+
+    if (!produto) {
+        return;
+    }
+
+
+    document.getElementById(
+        "produtoId"
+    ).value = produto.id;
+
+
+    document.getElementById(
+        "nome"
+    ).value = produto.nome || "";
+
+
+    document.getElementById(
+        "codigo"
+    ).value = produto.codigo || "";
+
+
+    document.getElementById(
+        "categoria"
+    ).value =
+        produto.categoria || "Água";
+
+
+    document.getElementById(
+        "preco"
+    ).value =
+        produto.preco || "";
+
+
+    document.getElementById(
+        "estoque"
+    ).value =
+        produto.estoque || 0;
+
+
+    document.getElementById(
+        "estoqueMinimo"
+    ).value =
+        produto.estoqueMinimo || 0;
+
+
+    document.getElementById(
+        "controlaGalao"
+    ).value =
+        produto.controlaGalao || "sim";
+
+
+    document.getElementById(
+        "tituloFormulario"
+    ).textContent =
+        "✏️ Editar Produto";
+
+
+    document.querySelector(
+        ".btn-salvar"
+    ).textContent =
+        "💾 ATUALIZAR PRODUTO";
+
+
+    document.getElementById(
+        "btnCancelar"
+    ).style.display =
+        "block";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+function cancelarEdicao() {
+
+    limparFormulario();
+
+}
+
+
+function excluirProduto(id) {
+
+    const produtos =
+        obterProdutos();
+
+
+    const produto =
+        produtos.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
+
+
+    if (!produto) {
+        return;
+    }
+
+
+    const confirmar =
+        confirm(
+            "Deseja excluir o produto " +
+            produto.nome +
+            "?"
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    const novosProdutos =
+        produtos.filter(
+            item =>
+                String(item.id) !==
+                String(id)
+        );
+
+
+    salvarProdutos(
+        novosProdutos
+    );
+
+
+    mostrarProdutos();
+
+
+    alert(
+        "Produto excluído."
+    );
+
+}
+
+
+function mostrarProdutos() {
+
+    const lista =
+        document.getElementById(
+            "listaProdutos"
+        );
+
+
+    const pesquisa =
+        document.getElementById(
+            "pesquisa"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const produtos =
+        obterProdutos();
+
+
+    const filtrados =
+        produtos.filter(produto => {
+
+            const nome =
+                (
+                    produto.nome || ""
+                ).toLowerCase();
+
+
+            const codigo =
+                (
+                    produto.codigo || ""
+                ).toLowerCase();
+
+
+            const categoria =
+                (
+                    produto.categoria || ""
+                ).toLowerCase();
+
+
+            return (
+                nome.includes(pesquisa) ||
+                codigo.includes(pesquisa) ||
+                categoria.includes(pesquisa)
+            );
+
+        });
+
+
+    document.getElementById(
+        "contador"
+    ).textContent =
+        filtrados.length +
+        (
+            filtrados.length === 1
+                ? " produto"
+                : " produtos"
+        );
+
+
+    if (filtrados.length === 0) {
+
+        lista.innerHTML = `
+
+            <div class="vazio">
+
+                <span>📦</span>
+
+                <strong>
+                    Nenhum produto encontrado
+                </strong>
+
+                <p
+                    style="
+                        margin-top:6px;
+                        font-size:12px;
+                    "
+                >
+                    Cadastre seu primeiro produto acima.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    lista.innerHTML =
+        filtrados.map(produto => {
+
+
+            const estoqueAtual =
+                Number(
+                    produto.estoque || 0
+                );
+
+
+            const estoqueMinimo =
+                Number(
+                    produto.estoqueMinimo || 0
+                );
+
+
+            const estoqueBaixo =
+                estoqueAtual <=
+                estoqueMinimo;
+
+
+            const classeEstoque =
+                estoqueBaixo
+                    ? "estoque-baixo"
+                    : "estoque-normal";
+
+
+            const textoEstoque =
+                estoqueBaixo
+                    ? "⚠️ Estoque baixo"
+                    : "✓ Estoque normal";
+
+
+            return `
+
+                <div class="produto">
+
+                    <div class="produto-topo">
+
+                        <div class="produto-icone">
+                            💧
+                        </div>
+
+                        <div class="produto-nome">
+
+                            <strong>
+                                ${escaparHTML(
+                                    produto.nome
+                                )}
+                            </strong>
+
+                            <small>
+                                ${escaparHTML(
+                                    produto.categoria || "Produto"
+                                )}
+
+                                ${
+                                    produto.codigo
+                                    ? " • Código: " +
+                                      escaparHTML(
+                                          produto.codigo
+                                      )
+                                    : ""
+                                }
+                            </small>
+
+                        </div>
+
+                        <div class="preco">
+                            ${moeda(produto.preco)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="produto-info">
+
+                        <div class="info-box">
+
+                            <small>
+                                ESTOQUE
+                            </small>
+
+                            <strong
+                                class="${classeEstoque}"
+                            >
+                                ${estoqueAtual}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <small>
+                                MÍNIMO
+                            </small>
+
+                            <strong>
+                                ${estoqueMinimo}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <small>
+                                GALÃO
+                            </small>
+
+                            <strong>
+                                ${
+                                    produto.controlaGalao === "sim"
+                                    ? "Sim"
+                                    : "Não"
+                                }
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <small>
+                                SITUAÇÃO
+                            </small>
+
+                            <strong
+                                class="${classeEstoque}"
+                            >
+                                ${textoEstoque}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="acoes">
+
+                        <button
+                            class="btn-editar"
+                            onclick="editarProduto(
+                                ${produto.id}
+                            )"
+                        >
+                            ✏️ EDITAR
+                        </button>
+
+
+                        <button
+                            class="btn-excluir"
+                            onclick="excluirProduto(
+                                ${produto.id}
+                            )"
+                        >
+                            🗑️ EXCLUIR
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+function escaparHTML(texto) {
+
+    return String(texto)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+mostrarProdutos();
+
+</script>
+
+</body>
+</html>

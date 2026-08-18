@@ -1,0 +1,24 @@
+{
+    "name": "Vendedor de Água",
+    "short_name": "Vendedor de Água",
+    "description": "Sistema de vendas, clientes, entregas, fiado, caixa e relatórios.",
+    "start_url": "index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#ffffff",
+    "theme_color": "#0879d1",
+    "lang": "pt-BR",
+    "icons": [
+        {
+            "src": "icone/icone.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icone/icone.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

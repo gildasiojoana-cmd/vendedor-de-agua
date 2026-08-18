@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Caixa - Vendedor de Água</title>
+
+<link
+    rel="stylesheet"
+    href="css/estilo.css"
+>
+
+<style>
+
+.pagina{
+    padding:18px 14px 30px;
+}
+
+.cabecalho-pagina{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.voltar{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:13px;
+    background:white;
+    font-size:25px;
+    cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.cabecalho-pagina h2{
+    font-size:21px;
+}
+
+.cabecalho-pagina p{
+    color:#64748b;
+    font-size:12px;
+    margin-top:3px;
+}
+
+
+/* STATUS */
+
+.status-caixa{
+    background:white;
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:14px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.status-icone{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    background:#dcfce7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.status-info{
+    flex:1;
+}
+
+.status-info small{
+    display:block;
+    color:#64748b;
+    font-size:10px;
+}
+
+.status-info strong{
+    display:block;
+    font-size:18px;
+    margin-top:3px;
+    color:#16a34a;
+}
+
+.status-fechado .status-icone{
+    background:#fee2e2;
+}
+
+.status-fechado .status-info strong{
+    color:#dc2626;
+}
+
+
+/* SALDO */
+
+.saldo-card{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    text-align:center;
+    margin-bottom:14px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.saldo-card small{
+    color:#64748b;
+    font-size:11px;
+}
+
+.saldo-card strong{
+    display:block;
+    font-size:31px;
+    color:#0879d1;
+    margin-top:6px;
+}
+
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-bottom:14px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:14px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.card small{
+    display:block;
+    color:#64748b;
+    font-size:10px;
+}
+
+.card strong{
+    display:block;
+    margin-top:5px;
+    font-size:18px;
+}
+
+.card.entrada strong{
+    color:#16a34a;
+}
+
+.card.saida strong{
+    color:#dc2626;
+}
+
+.card.fiado strong{
+    color:#ea580c;
+}
+
+.card.vendas strong{
+    color:#0879d1;
+}
+
+
+/* BOTÕES */
+
+.botoes{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-bottom:15px;
+}
+
+.btn{
+    border:none;
+    border-radius:13px;
+    padding:14px 8px;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:11px;
+}
+
+.btn-abrir{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-entrada{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.btn-saida{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.btn-fechar{
+    background:#1e293b;
+    color:white;
+}
+
+.btn-desabilitado{
+    opacity:.45;
+    pointer-events:none;
+}
+
+
+/* HISTÓRICO */
+
+.titulo{
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:9px;
+}
+
+.movimento{
+    background:white;
+    border-radius:16px;
+    padding:13px;
+    margin-bottom:9px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.mov-icone{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:19px;
+}
+
+.mov-entrada{
+    background:#dcfce7;
+}
+
+.mov-saida{
+    background:#fee2e2;
+}
+
+.mov-info{
+    flex:1;
+}
+
+.mov-info strong{
+    display:block;
+    font-size:12px;
+}
+
+.mov-info small{
+    display:block;
+    color:#64748b;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.mov-valor{
+    text-align:right;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.valor-entrada{
+    color:#16a34a;
+}
+
+.valor-saida{
+    color:#dc2626;
+}
+
+
+/* VAZIO */
+
+.vazio{
+    background:white;
+    border-radius:18px;
+    padding:35px 15px;
+    text-align:center;
+    color:#94a3b8;
+}
+
+.vazio span{
+    display:block;
+    font-size:40px;
+    margin-bottom:8px;
+}
+
+
+/* MODAL */
+
+.modal-fundo{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    z-index:1000;
+    padding:18px;
+    box-sizing:border-box;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.modal{
+    width:100%;
+    max-width:500px;
+    background:white;
+    border-radius:22px;
+    padding:18px;
+    box-sizing:border-box;
+}
+
+.modal h3{
+    margin-bottom:5px;
+}
+
+.modal p{
+    color:#64748b;
+    font-size:12px;
+}
+
+.modal input,
+.modal select{
+    width:100%;
+    box-sizing:border-box;
+    margin-top:12px;
+    padding:13px;
+    border:1px solid #dbe3ec;
+    border-radius:11px;
+    font-size:14px;
+    outline:none;
+}
+
+.modal-botoes{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.modal-botoes button{
+    flex:1;
+    border:none;
+    border-radius:11px;
+    padding:13px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.cancelar{
+    background:#e2e8f0;
+    color:#334155;
+}
+
+.confirmar{
+    background:#0879d1;
+    color:white;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<header class="topo">
+
+    <div class="logo">
+        💧
+    </div>
+
+    <div>
+
+        <h1>
+            Vendedor de Água
+        </h1>
+
+        <p>
+            Controle do caixa
+        </p>
+
+    </div>
+
+</header>
+
+
+<main class="pagina">
+
+
+<!-- CABEÇALHO -->
+
+<div class="cabecalho-pagina">
+
+    <button
+        class="voltar"
+        onclick="window.location.href='index.html'"
+    >
+        ‹
+    </button>
+
+    <div>
+
+        <h2>
+            💰 Caixa
+        </h2>
+
+        <p>
+            Entradas, saídas e saldo
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STATUS -->
+
+<div
+    id="statusCaixa"
+    class="status-caixa status-fechado"
+>
+
+    <div class="status-icone">
+        🔒
+    </div>
+
+    <div class="status-info">
+
+        <small>
+            STATUS DO CAIXA
+        </small>
+
+        <strong>
+            FECHADO
+        </strong>
+
+    </div>
+
+</div>
+
+
+<!-- SALDO -->
+
+<div class="saldo-card">
+
+    <small>
+        SALDO ATUAL
+    </small>
+
+    <strong id="saldoAtual">
+        R$ 0,00
+    </strong>
+
+</div>
+
+
+<!-- CARDS -->
+
+<div class="cards">
+
+
+    <div class="card entrada">
+
+        <small>
+            ENTRADAS
+        </small>
+
+        <strong id="totalEntradas">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+
+    <div class="card saida">
+
+        <small>
+            SAÍDAS
+        </small>
+
+        <strong id="totalSaidas">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+
+    <div class="card vendas">
+
+        <small>
+            VENDAS RECEBIDAS
+        </small>
+
+        <strong id="totalVendas">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+
+    <div class="card fiado">
+
+        <small>
+            VENDAS FIADAS
+        </small>
+
+        <strong id="totalFiado">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+
+</div>
+
+
+<!-- BOTÕES -->
+
+<div class="botoes">
+
+
+    <button
+        id="btnAbrir"
+        class="btn btn-abrir"
+        onclick="abrirCaixa()"
+    >
+        🔓 ABRIR CAIXA
+    </button>
+
+
+    <button
+        id="btnEntrada"
+        class="btn btn-entrada btn-desabilitado"
+        onclick="abrirMovimento('entrada')"
+    >
+        ➕ ENTRADA
+    </button>
+
+
+    <button
+        id="btnSaida"
+        class="btn btn-saida btn-desabilitado"
+        onclick="abrirMovimento('saida')"
+    >
+        ➖ SAÍDA
+    </button>
+
+
+    <button
+        id="btnFechar"
+        class="btn btn-fechar btn-desabilitado"
+        onclick="fecharCaixa()"
+    >
+        🔒 FECHAR CAIXA
+    </button>
+
+
+</div>
+
+
+<!-- HISTÓRICO -->
+
+<div class="titulo">
+    📋 Movimentações
+</div>
+
+
+<div id="listaMovimentos"></div>
+
+
+</main>
+
+</div>
+
+
+<!-- MODAL MOVIMENTO -->
+
+<div
+    class="modal-fundo"
+    id="modalMovimento"
+>
+
+    <div class="modal">
+
+        <h3 id="tituloMovimento">
+            Nova movimentação
+        </h3>
+
+        <p>
+            Informe os dados da movimentação.
+        </p>
+
+
+        <input
+            type="text"
+            id="descricaoMovimento"
+            placeholder="Descrição"
+        >
+
+
+        <input
+            type="number"
+            id="valorMovimento"
+            step="0.01"
+            min="0.01"
+            placeholder="Valor"
+        >
+
+
+        <div class="modal-botoes">
+
+            <button
+                class="cancelar"
+                onclick="fecharModal()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="confirmar"
+                onclick="confirmarMovimento()"
+            >
+                Confirmar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL ABERTURA -->
+
+<div
+    class="modal-fundo"
+    id="modalAbertura"
+>
+
+    <div class="modal">
+
+        <h3>
+            🔓 Abrir caixa
+        </h3>
+
+        <p>
+            Informe o valor inicial do caixa.
+        </p>
+
+
+        <input
+            type="number"
+            id="valorAbertura"
+            step="0.01"
+            min="0"
+            placeholder="Ex.: 100,00"
+        >
+
+
+        <div class="modal-botoes">
+
+            <button
+                class="cancelar"
+                onclick="fecharModalAbertura()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="confirmar"
+                onclick="confirmarAbertura()"
+            >
+                Abrir Caixa
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =====================================
+   CHAVES
+===================================== */
+
+
+const CHAVE_CAIXA =
+    "vendedor_agua_caixa";
+
+
+const CHAVE_VENDAS =
+    "vendedor_agua_vendas";
+
+
+/* =====================================
+   DADOS
+===================================== */
+
+
+function obterCaixa(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CHAVE_CAIXA
+            )
+        ) || {
+
+            aberto:false,
+
+            abertura:0,
+
+            movimentos:[],
+
+            dataAbertura:null,
+
+            dataFechamento:null
+
+        };
+
+    }catch(e){
+
+        return {
+
+            aberto:false,
+
+            abertura:0,
+
+            movimentos:[],
+
+            dataAbertura:null,
+
+            dataFechamento:null
+
+        };
+
+    }
+
+}
+
+
+function salvarCaixa(
+    caixa
+){
+
+    localStorage.setItem(
+        CHAVE_CAIXA,
+        JSON.stringify(
+            caixa
+        )
+    );
+
+}
+
+
+function obterVendas(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CHAVE_VENDAS
+            )
+        ) || [];
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================
+   MOEDA
+===================================== */
+
+
+function moeda(
+    valor
+){
+
+    return Number(
+        valor || 0
+    ).toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
+
+}
+
+
+/* =====================================
+   ABRIR CAIXA
+===================================== */
+
+
+function abrirCaixa(){
+
+    const caixa =
+        obterCaixa();
+
+
+    if(
+        caixa.aberto
+    ){
+
+        alert(
+            "O caixa já está aberto."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "valorAbertura"
+    ).value = "";
+
+
+    document.getElementById(
+        "modalAbertura"
+    ).style.display =
+        "flex";
+
+
+    setTimeout(
+        () => {
+
+            document.getElementById(
+                "valorAbertura"
+            ).focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* =====================================
+   CONFIRMAR ABERTURA
+===================================== */
+
+
+function confirmarAbertura(){
+
+    const valor =
+        Number(
+            document.getElementById(
+                "valorAbertura"
+            ).value
+        );
+
+
+    if(
+        valor < 0 ||
+        isNaN(valor)
+    ){
+
+        alert(
+            "Informe um valor válido."
+        );
+
+        return;
+
+    }
+
+
+    const caixa =
+        obterCaixa();
+
+
+    caixa.aberto =
+        true;
+
+
+    caixa.abertura =
+        valor;
+
+
+    caixa.movimentos =
+        [];
+
+
+    caixa.dataAbertura =
+        new Date()
+        .toISOString();
+
+
+    caixa.dataFechamento =
+        null;
+
+
+    salvarCaixa(
+        caixa
+    );
+
+
+    fecharModalAbertura();
+
+
+    atualizar();
+
+}
+
+
+/* =====================================
+   FECHAR CAIXA
+===================================== */
+
+
+function fecharCaixa(){
+
+    const caixa =
+        obterCaixa();
+
+
+    if(
+        !caixa.aberto
+    ){
+
+        alert(
+            "O caixa já está fechado."
+        );
+
+        return;
+
+    }
+
+
+    const saldo =
+        calcularSaldo();
+
+
+    const confirmar =
+        confirm(
+
+            "DESEJA FECHAR O CAIXA?\n\n" +
+
+            "Saldo final: " +
+
+            moeda(
+                saldo
+            )
+
+        );
+
+
+    if(
+        !confirmar
+    ){
+
+        return;
+
+    }
+
+
+    caixa.aberto =
+        false;
+
+
+    caixa.dataFechamento =
+        new Date()
+        .toISOString();
+
+
+    salvarCaixa(
+        caixa
+    );
+
+
+    alert(
+
+        "🔒 CAIXA FECHADO!\n\n" +
+
+        "Saldo final: " +
+
+        moeda(
+            saldo
+        )
+
+    );
+
+
+    atualizar();
+
+}
+
+
+/* =====================================
+   MODAL MOVIMENTO
+===================================== */
+
+
+let tipoMovimento =
+    null;
+
+
+function abrirMovimento(
+    tipo
+){
+
+    const caixa =
+        obterCaixa();
+
+
+    if(
+        !caixa.aberto
+    ){
+
+        alert(
+            "Abra o caixa primeiro."
+        );
+
+        return;
+
+    }
+
+
+    tipoMovimento =
+        tipo;
+
+
+    document.getElementById(
+        "tituloMovimento"
+    ).textContent =
+
+        tipo === "entrada"
+
+        ?
+
+        "➕ Nova entrada"
+
+        :
+
+        "➖ Nova saída";
+
+
+    document.getElementById(
+        "descricaoMovimento"
+    ).value = "";
+
+
+    document.getElementById(
+        "valorMovimento"
+    ).value = "";
+
+
+    document.getElementById(
+        "modalMovimento"
+    ).style.display =
+        "flex";
+
+
+    setTimeout(
+        () => {
+
+            document.getElementById(
+                "descricaoMovimento"
+            ).focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* =====================================
+   CONFIRMAR MOVIMENTO
+===================================== */
+
+
+function confirmarMovimento(){
+
+    const descricao =
+        document.getElementById(
+            "descricaoMovimento"
+        ).value
+        .trim();
+
+
+    const valor =
+        Number(
+            document.getElementById(
+                "valorMovimento"
+            ).value
+        );
+
+
+    if(
+        !descricao
+    ){
+
+        alert(
+            "Informe a descrição."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !valor ||
+        valor <= 0
+    ){
+
+        alert(
+            "Informe um valor válido."
+        );
+
+        return;
+
+    }
+
+
+    const caixa =
+        obterCaixa();
+
+
+    caixa.movimentos.push({
+
+        id:
+            Date.now(),
+
+        tipo:
+            tipoMovimento,
+
+        descricao:
+            descricao,
+
+        valor:
+            valor,
+
+        data:
+            new Date()
+            .toISOString()
+
+    });
+
+
+    salvarCaixa(
+        caixa
+    );
+
+
+    fecharModal();
+
+
+    atualizar();
+
+}
+
+
+/* =====================================
+   CALCULAR MOVIMENTAÇÕES
+===================================== */
+
+
+function calcularMovimentos(){
+
+    const caixa =
+        obterCaixa();
+
+
+    let entradas =
+        Number(
+            caixa.abertura ||
+            0
+        );
+
+
+    let saidas =
+        0;
+
+
+    caixa.movimentos
+        .forEach(
+            movimento => {
+
+                if(
+                    movimento.tipo ===
+                    "entrada"
+                ){
+
+                    entradas +=
+                        Number(
+                            movimento.valor ||
+                            0
+                        );
+
+                }
+
+
+                if(
+                    movimento.tipo ===
+                    "saida"
+                ){
+
+                    saidas +=
+                        Number(
+                            movimento.valor ||
+                            0
+                        );
+
+                }
+
+            }
+        );
+
+
+    return {
+
+        entradas:
+            entradas,
+
+        saidas:
+            saidas
+
+    };
+
+}
+
+
+/* =====================================
+   CALCULAR SALDO
+===================================== */
+
+
+function calcularSaldo(){
+
+    const dados =
+        calcularMovimentos();
+
+
+    return (
+
+        dados.entradas
+        -
+        dados.saidas
+
+    );
+
+}
+
+
+/* =====================================
+   VENDAS
+===================================== */
+
+
+function calcularVendas(){
+
+    const vendas =
+        obterVendas();
+
+
+    let recebidas =
+        0;
+
+
+    let fiado =
+        0;
+
+
+    vendas.forEach(
+        venda => {
+
+            /*
+              CONSIDERA APENAS
+              VENDAS DE HOJE
+            */
+
+            const hoje =
+                new Date();
+
+
+            const data =
+                new Date(
+                    venda.data
+                );
+
+
+            const ehHoje =
+
+                hoje.getFullYear() ===
+                data.getFullYear()
+
+                &&
+
+                hoje.getMonth() ===
+                data.getMonth()
+
+                &&
+
+                hoje.getDate() ===
+                data.getDate();
+
+
+            if(
+                !ehHoje
+            ){
+
+                return;
+
+            }
+
+
+            const valor =
+                Number(
+                    venda.total ||
+                    0
+                );
+
+
+            const forma =
+                String(
+                    venda.pagamento ||
+                    ""
+                )
+                .trim()
+                .toLowerCase();
+
+
+            if(
+                forma ===
+                "fiado"
+            ){
+
+                fiado +=
+                    valor;
+
+            }else{
+
+                recebidas +=
+                    valor;
+
+            }
+
+        }
+    );
+
+
+    return {
+
+        recebidas:
+            recebidas,
+
+        fiado:
+            fiado
+
+    };
+
+}
+
+
+/* =====================================
+   ATUALIZAR
+===================================== */
+
+
+function atualizar(){
+
+    const caixa =
+        obterCaixa();
+
+
+    const movimentos =
+        calcularMovimentos();
+
+
+    const vendas =
+        calcularVendas();
+
+
+    const saldo =
+        calcularSaldo();
+
+
+    /* SALDO */
+
+    document.getElementById(
+        "saldoAtual"
+    ).textContent =
+        moeda(
+            saldo
+        );
+
+
+    /* ENTRADAS */
+
+    document.getElementById(
+        "totalEntradas"
+    ).textContent =
+        moeda(
+            movimentos.entradas
+        );
+
+
+    /* SAÍDAS */
+
+    document.getElementById(
+        "totalSaidas"
+    ).textContent =
+        moeda(
+            movimentos.saidas
+        );
+
+
+    /* VENDAS */
+
+    document.getElementById(
+        "totalVendas"
+    ).textContent =
+        moeda(
+            vendas.recebidas
+        );
+
+
+    /* FIADO */
+
+    document.getElementById(
+        "totalFiado"
+    ).textContent =
+        moeda(
+            vendas.fiado
+        );
+
+
+    atualizarStatus(
+        caixa
+    );
+
+
+    mostrarMovimentos(
+        caixa
+    );
+
+}
+
+
+/* =====================================
+   STATUS
+===================================== */
+
+
+function atualizarStatus(
+    caixa
+){
+
+    const status =
+        document.getElementById(
+            "statusCaixa"
+        );
+
+
+    const icone =
+        status.querySelector(
+            ".status-icone"
+        );
+
+
+    const texto =
+        status.querySelector(
+            ".status-info strong"
+        );
+
+
+    const btnAbrir =
+        document.getElementById(
+            "btnAbrir"
+        );
+
+
+    const btnEntrada =
+        document.getElementById(
+            "btnEntrada"
+        );
+
+
+    const btnSaida =
+        document.getElementById(
+            "btnSaida"
+        );
+
+
+    const btnFechar =
+        document.getElementById(
+            "btnFechar"
+        );
+
+
+    if(
+        caixa.aberto
+    ){
+
+        status.classList.remove(
+            "status-fechado"
+        );
+
+
+        icone.textContent =
+            "🔓";
+
+
+        texto.textContent =
+            "CAIXA ABERTO";
+
+
+        btnAbrir.classList.add(
+            "btn-desabilitado"
+        );
+
+
+        btnEntrada.classList.remove(
+            "btn-desabilitado"
+        );
+
+
+        btnSaida.classList.remove(
+            "btn-desabilitado"
+        );
+
+
+        btnFechar.classList.remove(
+            "btn-desabilitado"
+        );
+
+    }else{
+
+        status.classList.add(
+            "status-fechado"
+        );
+
+
+        icone.textContent =
+            "🔒";
+
+
+        texto.textContent =
+            "CAIXA FECHADO";
+
+
+        btnAbrir.classList.remove(
+            "btn-desabilitado"
+        );
+
+
+        btnEntrada.classList.add(
+            "btn-desabilitado"
+        );
+
+
+        btnSaida.classList.add(
+            "btn-desabilitado"
+        );
+
+
+        btnFechar.classList.add(
+            "btn-desabilitado"
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   MOSTRAR HISTÓRICO
+===================================== */
+
+
+function mostrarMovimentos(
+    caixa
+){
+
+    const container =
+        document.getElementById(
+            "listaMovimentos"
+        );
+
+
+    const movimentos =
+        [...caixa.movimentos]
+        .sort(
+            (a,b) =>
+
+                new Date(
+                    b.data
+                )
+
+                -
+
+                new Date(
+                    a.data
+                )
+        );
+
+
+    if(
+        movimentos.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="vazio">
+
+                <span>
+                    💰
+                </span>
+
+                <strong>
+                    Nenhuma movimentação
+                </strong>
+
+                <p
+                    style="
+                        margin-top:7px;
+                        font-size:11px;
+                    "
+                >
+                    As entradas e saídas
+                    aparecerão aqui.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+
+        movimentos
+        .map(
+            movimento => `
+
+                <div class="movimento">
+
+                    <div
+                        class="mov-icone ${
+                            movimento.tipo ===
+                            "entrada"
+                            ? "mov-entrada"
+                            : "mov-saida"
+                        }"
+                    >
+
+                        ${
+                            movimento.tipo ===
+                            "entrada"
+                            ? "➕"
+                            : "➖"
+                        }
+
+                    </div>
+
+
+                    <div class="mov-info">
+
+                        <strong>
+                            ${escaparHTML(
+                                movimento.descricao
+                            )}
+                        </strong>
+
+                        <small>
+
+                            ${formatarData(
+                                movimento.data
+                            )}
+
+                        </small>
+
+                    </div>
+
+
+                    <div
+                        class="mov-valor ${
+                            movimento.tipo ===
+                            "entrada"
+                            ? "valor-entrada"
+                            : "valor-saida"
+                        }"
+                    >
+
+                        ${
+                            movimento.tipo ===
+                            "entrada"
+                            ? "+ "
+                            : "- "
+                        }
+
+                        ${moeda(
+                            movimento.valor
+                        )}
+
+                    </div>
+
+                </div>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* =====================================
+   FECHAR MODAIS
+===================================== */
+
+
+function fecharModal(){
+
+    document.getElementById(
+        "modalMovimento"
+    ).style.display =
+        "none";
+
+}
+
+
+function fecharModalAbertura(){
+
+    document.getElementById(
+        "modalAbertura"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =====================================
+   DATA
+===================================== */
+
+
+function formatarData(
+    data
+){
+
+    return new Date(
+        data
+    ).toLocaleString(
+        "pt-BR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =====================================
+   SEGURANÇA
+===================================== */
+
+
+function escaparHTML(
+    texto
+){
+
+    return String(
+        texto || ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================
+   INICIAR
+===================================== */
+
+
+atualizar();
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Fiado - Vendedor de Água</title>
+
+<link
+    rel="stylesheet"
+    href="css/estilo.css"
+>
+
+<style>
+
+.pagina{
+    padding:18px 14px 30px;
+}
+
+.cabecalho-pagina{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.voltar{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:13px;
+    background:white;
+    font-size:25px;
+    cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.cabecalho-pagina h2{
+    font-size:21px;
+}
+
+.cabecalho-pagina p{
+    color:#64748b;
+    font-size:12px;
+    margin-top:3px;
+}
+
+.resumo{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.card{
+    background:white;
+    border-radius:17px;
+    padding:16px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.card small{
+    color:#64748b;
+    font-size:10px;
+    display:block;
+}
+
+.card strong{
+    display:block;
+    font-size:20px;
+    margin-top:5px;
+}
+
+.card.devedor strong{
+    color:#dc2626;
+}
+
+.card.recebido strong{
+    color:#16a34a;
+}
+
+.pesquisa{
+    background:white;
+    border-radius:16px;
+    padding:12px;
+    margin-bottom:14px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.pesquisa input{
+    width:100%;
+    box-sizing:border-box;
+    border:1px solid #dbe3ec;
+    border-radius:11px;
+    padding:13px;
+    outline:none;
+    font-size:14px;
+}
+
+.cliente{
+    background:white;
+    border-radius:18px;
+    padding:15px;
+    margin-bottom:11px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.cliente-topo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.avatar{
+    width:45px;
+    height:45px;
+    border-radius:14px;
+    background:#fee2e2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.nome{
+    flex:1;
+}
+
+.nome strong{
+    display:block;
+    font-size:15px;
+}
+
+.nome small{
+    display:block;
+    color:#64748b;
+    font-size:11px;
+    margin-top:3px;
+}
+
+.saldo{
+    text-align:right;
+}
+
+.saldo small{
+    display:block;
+    color:#64748b;
+    font-size:10px;
+}
+
+.saldo strong{
+    display:block;
+    color:#dc2626;
+    font-size:17px;
+    margin-top:2px;
+}
+
+.cliente-info{
+    border-top:1px solid #eef2f7;
+    margin-top:12px;
+    padding-top:11px;
+    font-size:12px;
+    color:#475569;
+    line-height:1.7;
+}
+
+.historico{
+    margin-top:12px;
+    border-top:1px solid #eef2f7;
+    padding-top:10px;
+}
+
+.movimento{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:8px 0;
+    font-size:11px;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.movimento:last-child{
+    border-bottom:none;
+}
+
+.compra{
+    color:#dc2626;
+}
+
+.pagamento{
+    color:#16a34a;
+}
+
+.acoes{
+    display:flex;
+    gap:7px;
+    margin-top:12px;
+}
+
+.btn{
+    flex:1;
+    border:none;
+    border-radius:11px;
+    padding:12px 7px;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:10px;
+}
+
+.btn-pagar{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-historico{
+    background:#e0f2fe;
+    color:#0369a1;
+}
+
+.btn-quitar{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.vazio{
+    background:white;
+    border-radius:18px;
+    padding:40px 15px;
+    text-align:center;
+    color:#94a3b8;
+}
+
+.vazio span{
+    display:block;
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+.vazio strong{
+    color:#64748b;
+}
+
+.modal-fundo{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    z-index:1000;
+    padding:18px;
+    box-sizing:border-box;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.modal{
+    background:white;
+    width:100%;
+    max-width:500px;
+    border-radius:22px;
+    padding:18px;
+    box-sizing:border-box;
+}
+
+.modal h3{
+    margin-bottom:5px;
+}
+
+.modal p{
+    color:#64748b;
+    font-size:12px;
+    margin-bottom:14px;
+}
+
+.modal input{
+    width:100%;
+    box-sizing:border-box;
+    padding:14px;
+    border:1px solid #dbe3ec;
+    border-radius:11px;
+    font-size:16px;
+    outline:none;
+}
+
+.modal-botoes{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.modal-botoes button{
+    flex:1;
+    border:none;
+    border-radius:11px;
+    padding:13px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.cancelar{
+    background:#e2e8f0;
+    color:#334155;
+}
+
+.confirmar{
+    background:#16a34a;
+    color:white;
+}
+
+@media(max-width:380px){
+
+    .resumo{
+        grid-template-columns:1fr;
+    }
+
+    .acoes{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<header class="topo">
+
+    <div class="logo">
+        💧
+    </div>
+
+    <div>
+
+        <h1>
+            Vendedor de Água
+        </h1>
+
+        <p>
+            Controle de fiado
+        </p>
+
+    </div>
+
+</header>
+
+
+<main class="pagina">
+
+
+<div class="cabecalho-pagina">
+
+    <button
+        class="voltar"
+        onclick="window.location.href='index.html'"
+    >
+        ‹
+    </button>
+
+    <div>
+
+        <h2>
+            💳 Fiado
+        </h2>
+
+        <p>
+            Somente vendas feitas no fiado
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- RESUMO -->
+
+<div class="resumo">
+
+    <div class="card devedor">
+
+        <small>
+            TOTAL A RECEBER
+        </small>
+
+        <strong id="totalReceber">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+
+    <div class="card recebido">
+
+        <small>
+            TOTAL RECEBIDO
+        </small>
+
+        <strong id="totalRecebido">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+</div>
+
+
+<!-- PESQUISA -->
+
+<div class="pesquisa">
+
+    <input
+        type="search"
+        id="pesquisa"
+        placeholder="🔎 Pesquisar cliente..."
+    >
+
+</div>
+
+
+<!-- LISTA -->
+
+<div id="listaClientes"></div>
+
+
+</main>
+
+</div>
+
+
+<!-- MODAL PAGAMENTO -->
+
+<div
+    class="modal-fundo"
+    id="modalPagamento"
+>
+
+    <div class="modal">
+
+        <h3>
+            💵 Registrar pagamento
+        </h3>
+
+        <p id="nomePagamento">
+            Cliente
+        </p>
+
+        <input
+            type="number"
+            id="valorPagamento"
+            step="0.01"
+            min="0.01"
+            placeholder="Digite o valor"
+        >
+
+        <div class="modal-botoes">
+
+            <button
+                class="cancelar"
+                onclick="fecharModal()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="confirmar"
+                onclick="confirmarPagamento()"
+            >
+                Registrar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =========================================
+   CHAVES DO SISTEMA
+========================================= */
+
+
+const CHAVE_CLIENTES =
+    "vendedor_agua_clientes";
+
+
+const CHAVE_VENDAS =
+    "vendedor_agua_vendas";
+
+
+const CHAVE_PAGAMENTOS =
+    "vendedor_agua_pagamentos";
+
+
+let clientePagamento = null;
+
+
+/* =========================================
+   OBTER CLIENTES
+========================================= */
+
+
+function obterClientes(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CHAVE_CLIENTES
+            )
+        ) || [];
+
+    }catch(erro){
+
+        console.error(
+            "Erro ao carregar clientes:",
+            erro
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================
+   OBTER VENDAS
+========================================= */
+
+
+function obterVendas(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CHAVE_VENDAS
+            )
+        ) || [];
+
+    }catch(erro){
+
+        console.error(
+            "Erro ao carregar vendas:",
+            erro
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================
+   OBTER PAGAMENTOS
+========================================= */
+
+
+function obterPagamentos(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CHAVE_PAGAMENTOS
+            )
+        ) || [];
+
+    }catch(erro){
+
+        console.error(
+            "Erro ao carregar pagamentos:",
+            erro
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================
+   SALVAR PAGAMENTOS
+========================================= */
+
+
+function salvarPagamentos(
+    pagamentos
+){
+
+    localStorage.setItem(
+        CHAVE_PAGAMENTOS,
+        JSON.stringify(
+            pagamentos
+        )
+    );
+
+}
+
+
+/* =========================================
+   MOEDA
+========================================= */
+
+
+function moeda(valor){
+
+    return Number(
+        valor || 0
+    ).toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
+
+}
+
+
+/* =========================================
+   CALCULAR CONTA DO CLIENTE
+========================================= */
+
+
+function calcularCliente(
+    clienteId
+){
+
+    const vendas =
+        obterVendas();
+
+
+    const pagamentos =
+        obterPagamentos();
+
+
+    /*
+       IMPORTANTE:
+
+       AQUI SÓ ENTRAM VENDAS
+       QUE REALMENTE FORAM PAGAS
+       COMO FIADO.
+    */
+
+    const compras =
+        vendas.filter(
+            venda =>
+
+                String(
+                    venda.clienteId
+                ) ===
+                String(
+                    clienteId
+                )
+
+                &&
+
+                String(
+                    venda.pagamento || ""
+                ).trim().toLowerCase()
+                ===
+                "fiado"
+        );
+
+
+    /*
+       PAGAMENTOS DO CLIENTE
+    */
+
+    const recebimentos =
+        pagamentos.filter(
+            pagamento =>
+
+                String(
+                    pagamento.clienteId
+                ) ===
+                String(
+                    clienteId
+                )
+        );
+
+
+    /*
+       TOTAL DAS COMPRAS FIADAS
+    */
+
+    const totalCompras =
+        compras.reduce(
+            (
+                total,
+                venda
+            ) =>
+
+                total +
+                Number(
+                    venda.total || 0
+                ),
+
+            0
+        );
+
+
+    /*
+       TOTAL JÁ RECEBIDO
+    */
+
+    const totalPagamentos =
+        recebimentos.reduce(
+            (
+                total,
+                pagamento
+            ) =>
+
+                total +
+                Number(
+                    pagamento.valor || 0
+                ),
+
+            0
+        );
+
+
+    /*
+       SALDO
+    */
+
+    const saldo =
+        Math.max(
+            0,
+            totalCompras -
+            totalPagamentos
+        );
+
+
+    return {
+
+        compras:
+            compras,
+
+        recebimentos:
+            recebimentos,
+
+        totalCompras:
+            totalCompras,
+
+        totalPagamentos:
+            totalPagamentos,
+
+        saldo:
+            saldo
+
+    };
+
+}
+
+
+/* =========================================
+   RESUMO GERAL
+========================================= */
+
+
+function atualizarResumo(){
+
+    const clientes =
+        obterClientes();
+
+
+    let totalReceber =
+        0;
+
+
+    let totalRecebido =
+        0;
+
+
+    clientes.forEach(
+        cliente => {
+
+            const dados =
+                calcularCliente(
+                    cliente.id
+                );
+
+
+            totalReceber +=
+                dados.saldo;
+
+
+            totalRecebido +=
+                dados.totalPagamentos;
+
+        }
+    );
+
+
+    document.getElementById(
+        "totalReceber"
+    ).textContent =
+        moeda(
+            totalReceber
+        );
+
+
+    document.getElementById(
+        "totalRecebido"
+    ).textContent =
+        moeda(
+            totalRecebido
+        );
+
+}
+
+
+/* =========================================
+   MOSTRAR CLIENTES DEVEDORES
+========================================= */
+
+
+function mostrarClientes(){
+
+    atualizarResumo();
+
+
+    const container =
+        document.getElementById(
+            "listaClientes"
+        );
+
+
+    const busca =
+        document.getElementById(
+            "pesquisa"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const clientes =
+        obterClientes();
+
+
+    /*
+       SÓ MOSTRA CLIENTES
+       QUE POSSUEM SALDO DE FIADO.
+    */
+
+    const lista =
+        clientes.filter(
+            cliente => {
+
+                const dados =
+                    calcularCliente(
+                        cliente.id
+                    );
+
+
+                const nome =
+                    String(
+                        cliente.nome || ""
+                    )
+                    .toLowerCase();
+
+
+                return (
+
+                    dados.saldo > 0
+
+                    &&
+
+                    (
+                        !busca
+                        ||
+                        nome.includes(
+                            busca
+                        )
+                    )
+
+                );
+
+            }
+        );
+
+
+    /*
+       MAIOR DÍVIDA PRIMEIRO
+    */
+
+    lista.sort(
+        (a,b) =>
+
+            calcularCliente(
+                b.id
+            ).saldo
+
+            -
+
+            calcularCliente(
+                a.id
+            ).saldo
+    );
+
+
+    if(
+        lista.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="vazio">
+
+                <span>
+                    💳
+                </span>
+
+                <strong>
+                    Nenhum cliente com débito
+                </strong>
+
+                <p
+                    style="
+                        margin-top:7px;
+                        font-size:12px;
+                    "
+                >
+                    Somente vendas marcadas como
+                    <strong>FIADO</strong>
+                    aparecem aqui.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+
+        lista.map(
+            cliente => {
+
+                const dados =
+                    calcularCliente(
+                        cliente.id
+                    );
+
+
+                return `
+
+                    <div class="cliente">
+
+                        <div class="cliente-topo">
+
+                            <div class="avatar">
+                                👤
+                            </div>
+
+
+                            <div class="nome">
+
+                                <strong>
+                                    ${escaparHTML(
+                                        cliente.nome
+                                    )}
+                                </strong>
+
+                                <small>
+                                    ${escaparHTML(
+                                        cliente.telefone ||
+                                        "Telefone não informado"
+                                    )}
+                                </small>
+
+                            </div>
+
+
+                            <div class="saldo">
+
+                                <small>
+                                    SALDO
+                                </small>
+
+                                <strong>
+                                    ${moeda(
+                                        dados.saldo
+                                    )}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="cliente-info">
+
+                            📦 Compras no fiado:
+                            <strong>
+                                ${moeda(
+                                    dados.totalCompras
+                                )}
+                            </strong>
+
+                            <br>
+
+                            💵 Pagamentos:
+                            <strong>
+                                ${moeda(
+                                    dados.totalPagamentos
+                                )}
+                            </strong>
+
+
+                            <div class="historico">
+
+                                ${montarHistorico(
+                                    dados
+                                )}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="acoes">
+
+                            <button
+                                class="btn btn-pagar"
+                                onclick="abrirPagamento(
+                                    '${cliente.id}'
+                                )"
+                            >
+                                💵 RECEBER
+                            </button>
+
+
+                            <button
+                                class="btn btn-historico"
+                                onclick="mostrarHistorico(
+                                    '${cliente.id}'
+                                )"
+                            >
+                                📋 HISTÓRICO
+                            </button>
+
+
+                            <button
+                                class="btn btn-quitar"
+                                onclick="receberTudo(
+                                    '${cliente.id}'
+                                )"
+                            >
+                                ✅ QUITAR
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================================
+   HISTÓRICO RESUMIDO
+========================================= */
+
+
+function montarHistorico(
+    dados
+){
+
+    const movimentos = [];
+
+
+    /*
+       COMPRAS FIADAS
+    */
+
+    dados.compras.forEach(
+        venda => {
+
+            movimentos.push({
+
+                data:
+                    new Date(
+                        venda.data
+                    ),
+
+                tipo:
+                    "compra",
+
+                texto:
+                    "Compra fiada",
+
+                valor:
+                    Number(
+                        venda.total || 0
+                    )
+
+            });
+
+        }
+    );
+
+
+    /*
+       PAGAMENTOS
+    */
+
+    dados.recebimentos.forEach(
+        pagamento => {
+
+            movimentos.push({
+
+                data:
+                    new Date(
+                        pagamento.data
+                    ),
+
+                tipo:
+                    "pagamento",
+
+                texto:
+                    "Pagamento",
+
+                valor:
+                    Number(
+                        pagamento.valor || 0
+                    )
+
+            });
+
+        }
+    );
+
+
+    movimentos.sort(
+        (a,b) =>
+            b.data - a.data
+    );
+
+
+    return movimentos
+        .slice(
+            0,
+            5
+        )
+        .map(
+            movimento => `
+
+                <div class="movimento">
+
+                    <span>
+
+                        ${
+                            movimento.tipo ===
+                            "compra"
+                            ? "📦"
+                            : "💵"
+                        }
+
+                        ${movimento.texto}
+
+                    </span>
+
+
+                    <strong
+                        class="${
+                            movimento.tipo ===
+                            "compra"
+                            ? "compra"
+                            : "pagamento"
+                        }"
+                    >
+
+                        ${
+                            movimento.tipo ===
+                            "compra"
+                            ? "+ "
+                            : "- "
+                        }
+
+                        ${moeda(
+                            movimento.valor
+                        )}
+
+                    </strong>
+
+                </div>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* =========================================
+   HISTÓRICO COMPLETO
+========================================= */
+
+
+function mostrarHistorico(
+    clienteId
+){
+
+    const cliente =
+        obterClientes().find(
+            item =>
+                String(
+                    item.id
+                ) ===
+                String(
+                    clienteId
+                )
+        );
+
+
+    if(!cliente){
+
+        return;
+
+    }
+
+
+    const dados =
+        calcularCliente(
+            clienteId
+        );
+
+
+    let texto =
+
+        "HISTÓRICO DE FIADO\n\n" +
+
+        cliente.nome +
+
+        "\n\n";
+
+
+    /*
+       COMPRAS
+    */
+
+    dados.compras.forEach(
+        venda => {
+
+            texto +=
+
+                "📦 COMPRA FIADA\n" +
+
+                "Valor: " +
+
+                moeda(
+                    venda.total
+                ) +
+
+                "\nData: " +
+
+                formatarData(
+                    venda.data
+                ) +
+
+                "\n\n";
+
+        }
+    );
+
+
+    /*
+       PAGAMENTOS
+    */
+
+    dados.recebimentos.forEach(
+        pagamento => {
+
+            texto +=
+
+                "💵 PAGAMENTO\n" +
+
+                "Valor: " +
+
+                moeda(
+                    pagamento.valor
+                ) +
+
+                "\nData: " +
+
+                formatarData(
+                    pagamento.data
+                ) +
+
+                "\n\n";
+
+        }
+    );
+
+
+    texto +=
+
+        "--------------------\n" +
+
+        "TOTAL COMPRAS: " +
+
+        moeda(
+            dados.totalCompras
+        ) +
+
+        "\n" +
+
+        "TOTAL PAGAMENTOS: " +
+
+        moeda(
+            dados.totalPagamentos
+        ) +
+
+        "\n" +
+
+        "SALDO: " +
+
+        moeda(
+            dados.saldo
+        );
+
+
+    alert(
+        texto
+    );
+
+}
+
+
+/* =========================================
+   ABRIR PAGAMENTO
+========================================= */
+
+
+function abrirPagamento(
+    clienteId
+){
+
+    const cliente =
+        obterClientes().find(
+            item =>
+                String(
+                    item.id
+                ) ===
+                String(
+                    clienteId
+                )
+        );
+
+
+    if(!cliente){
+
+        return;
+
+    }
+
+
+    const dados =
+        calcularCliente(
+            clienteId
+        );
+
+
+    clientePagamento =
+        clienteId;
+
+
+    document.getElementById(
+        "nomePagamento"
+    ).textContent =
+
+        cliente.nome +
+
+        " — Saldo: " +
+
+        moeda(
+            dados.saldo
+        );
+
+
+    document.getElementById(
+        "valorPagamento"
+    ).value = "";
+
+
+    document.getElementById(
+        "valorPagamento"
+    ).max =
+        dados.saldo;
+
+
+    document.getElementById(
+        "modalPagamento"
+    ).style.display =
+        "flex";
+
+
+    setTimeout(
+        () => {
+
+            document.getElementById(
+                "valorPagamento"
+            ).focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* =========================================
+   FECHAR MODAL
+========================================= */
+
+
+function fecharModal(){
+
+    document.getElementById(
+        "modalPagamento"
+    ).style.display =
+        "none";
+
+
+    clientePagamento =
+        null;
+
+}
+
+
+/* =========================================
+   REGISTRAR PAGAMENTO
+========================================= */
+
+
+function confirmarPagamento(){
+
+    if(
+        !clientePagamento
+    ){
+
+        return;
+
+    }
+
+
+    const valor =
+        Number(
+            document.getElementById(
+                "valorPagamento"
+            ).value
+        );
+
+
+    if(
+        !valor ||
+        valor <= 0
+    ){
+
+        alert(
+            "Informe um valor válido."
+        );
+
+        return;
+
+    }
+
+
+    const dados =
+        calcularCliente(
+            clientePagamento
+        );
+
+
+    if(
+        valor >
+        dados.saldo
+    ){
+
+        alert(
+
+            "O pagamento não pode ser maior que o saldo.\n\n" +
+
+            "Saldo atual: " +
+
+            moeda(
+                dados.saldo
+            )
+
+        );
+
+        return;
+
+    }
+
+
+    const pagamentos =
+        obterPagamentos();
+
+
+    pagamentos.push({
+
+        id:
+            Date.now(),
+
+        clienteId:
+            clientePagamento,
+
+        valor:
+            valor,
+
+        data:
+            new Date()
+            .toISOString(),
+
+        tipo:
+            "Pagamento"
+
+    });
+
+
+    salvarPagamentos(
+        pagamentos
+    );
+
+
+    alert(
+
+        "✅ PAGAMENTO REGISTRADO!\n\n" +
+
+        "Valor recebido: " +
+
+        moeda(
+            valor
+        )
+
+    );
+
+
+    fecharModal();
+
+
+    mostrarClientes();
+
+}
+
+
+/* =========================================
+   QUITAR DÍVIDA
+========================================= */
+
+
+function receberTudo(
+    clienteId
+){
+
+    const cliente =
+        obterClientes().find(
+            item =>
+                String(
+                    item.id
+                ) ===
+                String(
+                    clienteId
+                )
+        );
+
+
+    if(!cliente){
+
+        return;
+
+    }
+
+
+    const dados =
+        calcularCliente(
+            clienteId
+        );
+
+
+    if(
+        dados.saldo <= 0
+    ){
+
+        return;
+
+    }
+
+
+    const confirmar =
+        confirm(
+
+            "QUITAR TODA A DÍVIDA?\n\n" +
+
+            "Cliente: " +
+
+            cliente.nome +
+
+            "\n\nSaldo: " +
+
+            moeda(
+                dados.saldo
+            )
+
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+    const pagamentos =
+        obterPagamentos();
+
+
+    pagamentos.push({
+
+        id:
+            Date.now(),
+
+        clienteId:
+            clienteId,
+
+        valor:
+            dados.saldo,
+
+        data:
+            new Date()
+            .toISOString(),
+
+        tipo:
+            "Quitação total"
+
+    });
+
+
+    salvarPagamentos(
+        pagamentos
+    );
+
+
+    alert(
+        "✅ DÍVIDA QUITADA!"
+    );
+
+
+    mostrarClientes();
+
+}
+
+
+/* =========================================
+   PESQUISA
+========================================= */
+
+
+document.getElementById(
+    "pesquisa"
+).addEventListener(
+    "input",
+    mostrarClientes
+);
+
+
+/* =========================================
+   FORMATAR DATA
+========================================= */
+
+
+function formatarData(
+    data
+){
+
+    return new Date(
+        data
+    ).toLocaleString(
+        "pt-BR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =========================================
+   SEGURANÇA
+========================================= */
+
+
+function escaparHTML(
+    texto
+){
+
+    return String(
+        texto
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================
+   INICIAR
+========================================= */
+
+
+mostrarClientes();
+
+
+</script>
+
+</body>
+
+</html>

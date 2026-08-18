@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Entregas - Vendedor de Água</title>
+
+<link
+    rel="stylesheet"
+    href="css/estilo.css"
+>
+
+<style>
+
+.pagina{
+    padding:18px 14px 30px;
+}
+
+.cabecalho-pagina{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.voltar{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:13px;
+    background:white;
+    font-size:25px;
+    cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.cabecalho-pagina h2{
+    font-size:21px;
+}
+
+.cabecalho-pagina p{
+    color:#64748b;
+    font-size:12px;
+    margin-top:3px;
+}
+
+
+/* FILTROS */
+
+.filtros{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:6px;
+    margin-bottom:14px;
+}
+
+.filtro{
+    border:none;
+    background:white;
+    color:#475569;
+    border-radius:10px;
+    padding:10px 4px;
+    font-size:10px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 2px 7px rgba(0,0,0,.05);
+}
+
+.filtro.ativo{
+    background:#0879d1;
+    color:white;
+}
+
+
+/* RESUMO */
+
+.resumo{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-bottom:14px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:13px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.card small{
+    display:block;
+    color:#64748b;
+    font-size:10px;
+}
+
+.card strong{
+    display:block;
+    margin-top:4px;
+    font-size:20px;
+}
+
+.pendente strong{
+    color:#ea580c;
+}
+
+.entregue strong{
+    color:#16a34a;
+}
+
+
+/* ENTREGA */
+
+.entrega{
+    background:white;
+    border-radius:18px;
+    padding:15px;
+    margin-bottom:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.topo-entrega{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.avatar{
+    width:46px;
+    height:46px;
+    border-radius:14px;
+    background:#e0f2fe;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.cliente{
+    flex:1;
+}
+
+.cliente strong{
+    display:block;
+    font-size:15px;
+}
+
+.cliente small{
+    display:block;
+    color:#64748b;
+    font-size:11px;
+    margin-top:3px;
+}
+
+.status{
+    padding:6px 8px;
+    border-radius:8px;
+    font-size:9px;
+    font-weight:bold;
+}
+
+.status.pendente{
+    background:#ffedd5;
+    color:#c2410c;
+}
+
+.status.entregue{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+
+/* ENDEREÇO */
+
+.endereco{
+    margin-top:13px;
+    padding:12px;
+    background:#f8fafc;
+    border-radius:12px;
+    font-size:12px;
+    color:#475569;
+    line-height:1.6;
+}
+
+.endereco strong{
+    display:block;
+    color:#1e293b;
+    margin-bottom:3px;
+}
+
+
+/* BOTÕES CONTATO */
+
+.contato{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-top:9px;
+}
+
+.btn-contato{
+    border:none;
+    border-radius:10px;
+    padding:11px 5px;
+    font-size:11px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn-ligar{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.btn-mapa{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+
+/* PRODUTOS */
+
+.produtos{
+    margin-top:12px;
+    border-top:1px solid #eef2f7;
+    padding-top:10px;
+}
+
+.produto{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:5px 0;
+    font-size:11px;
+}
+
+.produto span{
+    color:#64748b;
+}
+
+
+/* TOTAL */
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-top:1px solid #eef2f7;
+    margin-top:9px;
+    padding-top:10px;
+}
+
+.total small{
+    color:#64748b;
+}
+
+.total strong{
+    color:#0879d1;
+    font-size:18px;
+}
+
+
+/* AÇÕES */
+
+.acoes{
+    display:flex;
+    gap:7px;
+    margin-top:12px;
+}
+
+.btn-entregue,
+.btn-reabrir{
+    flex:1;
+    border:none;
+    border-radius:11px;
+    padding:12px 6px;
+    font-size:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn-entregue{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-reabrir{
+    background:#e2e8f0;
+    color:#334155;
+}
+
+.btn-excluir{
+    width:44px;
+    border:none;
+    border-radius:11px;
+    background:#fee2e2;
+    color:#b91c1c;
+    cursor:pointer;
+}
+
+
+/* VAZIO */
+
+.vazio{
+    background:white;
+    border-radius:18px;
+    padding:40px 15px;
+    text-align:center;
+    color:#94a3b8;
+}
+
+.vazio span{
+    display:block;
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+.vazio strong{
+    color:#64748b;
+}
+
+
+/* RESPONSIVO */
+
+@media(max-width:360px){
+
+    .filtros{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<header class="topo">
+
+    <div class="logo">
+        💧
+    </div>
+
+    <div>
+
+        <h1>
+            Vendedor de Água
+        </h1>
+
+        <p>
+            Controle de entregas
+        </p>
+
+    </div>
+
+</header>
+
+
+<main class="pagina">
+
+
+<div class="cabecalho-pagina">
+
+    <button
+        class="voltar"
+        onclick="window.location.href='index.html'"
+    >
+        ‹
+    </button>
+
+    <div>
+
+        <h2>
+            🚚 Entregas
+        </h2>
+
+        <p>
+            Organize suas entregas
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- FILTROS -->
+
+<div class="filtros">
+
+    <button
+        class="filtro ativo"
+        data-filtro="hoje"
+        onclick="selecionarFiltro(this)"
+    >
+        📅 HOJE
+    </button>
+
+    <button
+        class="filtro"
+        data-filtro="pendentes"
+        onclick="selecionarFiltro(this)"
+    >
+        🟠 PENDENTES
+    </button>
+
+    <button
+        class="filtro"
+        data-filtro="entregues"
+        onclick="selecionarFiltro(this)"
+    >
+        🟢 ENTREGUES
+    </button>
+
+    <button
+        class="filtro"
+        data-filtro="todas"
+        onclick="selecionarFiltro(this)"
+    >
+        📋 TODAS
+    </button>
+
+</div>
+
+
+<!-- RESUMO -->
+
+<div class="resumo">
+
+    <div class="card pendente">
+
+        <small>
+            PENDENTES
+        </small>
+
+        <strong id="totalPendentes">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="card entregue">
+
+        <small>
+            ENTREGUES
+        </small>
+
+        <strong id="totalEntregues">
+            0
+        </strong>
+
+    </div>
+
+</div>
+
+
+<div id="listaEntregas"></div>
+
+
+</main>
+
+</div>
+
+
+<script>
+
+
+/* ===================================
+   CHAVES
+=================================== */
+
+
+const CHAVE_VENDAS =
+    "vendedor_agua_vendas";
+
+
+const CHAVE_CLIENTES =
+    "vendedor_agua_clientes";
+
+
+const CHAVE_ENTREGAS =
+    "vendedor_agua_entregas";
+
+
+let filtroAtual =
+    "hoje";
+
+
+/* ===================================
+   DADOS
+=================================== */
+
+
+function obterVendas(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CHAVE_VENDAS
+            )
+        ) || [];
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function obterClientes(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CHAVE_CLIENTES
+            )
+        ) || [];
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function obterEntregas(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CHAVE_ENTREGAS
+            )
+        ) || [];
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function salvarEntregas(
+    entregas
+){
+
+    localStorage.setItem(
+        CHAVE_ENTREGAS,
+        JSON.stringify(
+            entregas
+        )
+    );
+
+}
+
+
+/* ===================================
+   MOEDA
+=================================== */
+
+
+function moeda(valor){
+
+    return Number(
+        valor || 0
+    ).toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
+
+}
+
+
+/* ===================================
+   DATA
+=================================== */
+
+
+function ehHoje(
+    data
+){
+
+    const hoje =
+        new Date();
+
+    const dataVenda =
+        new Date(
+            data
+        );
+
+
+    return (
+
+        hoje.getFullYear() ===
+        dataVenda.getFullYear()
+
+        &&
+
+        hoje.getMonth() ===
+        dataVenda.getMonth()
+
+        &&
+
+        hoje.getDate() ===
+        dataVenda.getDate()
+
+    );
+
+}
+
+
+function formatarData(
+    data
+){
+
+    return new Date(
+        data
+    ).toLocaleString(
+        "pt-BR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* ===================================
+   SINCRONIZAR
+=================================== */
+
+
+function sincronizarEntregas(){
+
+    const vendas =
+        obterVendas();
+
+    const clientes =
+        obterClientes();
+
+    let entregas =
+        obterEntregas();
+
+
+    vendas.forEach(
+        venda => {
+
+            /*
+              EVITA DUPLICAR
+            */
+
+            const existe =
+                entregas.some(
+                    entrega =>
+
+                        String(
+                            entrega.vendaId
+                        ) ===
+
+                        String(
+                            venda.id
+                        )
+                );
+
+
+            if(existe){
+
+                return;
+
+            }
+
+
+            /*
+              LOCALIZA CLIENTE
+            */
+
+            const cliente =
+                clientes.find(
+                    item =>
+
+                        String(
+                            item.id
+                        ) ===
+
+                        String(
+                            venda.clienteId
+                        )
+                );
+
+
+            /*
+              CRIA ENTREGA
+            */
+
+            entregas.push({
+
+                id:
+                    Date.now() +
+                    Math.random(),
+
+                vendaId:
+                    venda.id,
+
+                clienteId:
+                    venda.clienteId,
+
+                clienteNome:
+                    venda.clienteNome ||
+                    cliente?.nome ||
+                    "Consumidor avulso",
+
+                telefone:
+                    cliente?.telefone ||
+                    "",
+
+                endereco:
+                    cliente?.endereco ||
+                    "",
+
+                bairro:
+                    cliente?.bairro ||
+                    "",
+
+                cidade:
+                    cliente?.cidade ||
+                    "",
+
+                itens:
+                    venda.itens ||
+                    [],
+
+                total:
+                    venda.total ||
+                    0,
+
+                pagamento:
+                    venda.pagamento ||
+                    "",
+
+                data:
+                    venda.data ||
+                    new Date()
+                    .toISOString(),
+
+                status:
+                    "Pendente"
+
+            });
+
+        }
+    );
+
+
+    salvarEntregas(
+        entregas
+    );
+
+}
+
+
+/* ===================================
+   RESUMO
+=================================== */
+
+
+function atualizarResumo(){
+
+    const entregas =
+        obterEntregas();
+
+
+    const pendentes =
+        entregas.filter(
+            entrega =>
+                entrega.status ===
+                "Pendente"
+        );
+
+
+    const entregues =
+        entregas.filter(
+            entrega =>
+                entrega.status ===
+                "Entregue"
+        );
+
+
+    document.getElementById(
+        "totalPendentes"
+    ).textContent =
+        pendentes.length;
+
+
+    document.getElementById(
+        "totalEntregues"
+    ).textContent =
+        entregues.length;
+
+}
+
+
+/* ===================================
+   FILTROS
+=================================== */
+
+
+function selecionarFiltro(
+    botao
+){
+
+    document
+        .querySelectorAll(
+            ".filtro"
+        )
+        .forEach(
+            item =>
+                item.classList.remove(
+                    "ativo"
+                )
+        );
+
+
+    botao.classList.add(
+        "ativo"
+    );
+
+
+    filtroAtual =
+        botao.dataset.filtro;
+
+
+    mostrarEntregas();
+
+}
+
+
+/* ===================================
+   MOSTRAR
+=================================== */
+
+
+function mostrarEntregas(){
+
+    sincronizarEntregas();
+
+    atualizarResumo();
+
+
+    const container =
+        document.getElementById(
+            "listaEntregas"
+        );
+
+
+    const entregas =
+        obterEntregas();
+
+
+    let lista =
+        [...entregas];
+
+
+    if(
+        filtroAtual ===
+        "hoje"
+    ){
+
+        lista =
+            lista.filter(
+                entrega =>
+                    ehHoje(
+                        entrega.data
+                    )
+            );
+
+    }
+
+
+    if(
+        filtroAtual ===
+        "pendentes"
+    ){
+
+        lista =
+            lista.filter(
+                entrega =>
+                    entrega.status ===
+                    "Pendente"
+            );
+
+    }
+
+
+    if(
+        filtroAtual ===
+        "entregues"
+    ){
+
+        lista =
+            lista.filter(
+                entrega =>
+                    entrega.status ===
+                    "Entregue"
+            );
+
+    }
+
+
+    lista.sort(
+        (a,b) =>
+
+            new Date(
+                b.data
+            )
+
+            -
+
+            new Date(
+                a.data
+            )
+    );
+
+
+    if(
+        lista.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="vazio">
+
+                <span>
+                    🚚
+                </span>
+
+                <strong>
+                    Nenhuma entrega encontrada
+                </strong>
+
+                <p
+                    style="
+                        margin-top:7px;
+                        font-size:12px;
+                    "
+                >
+                    As vendas aparecerão
+                    automaticamente aqui.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+
+        lista.map(
+            entrega =>
+                montarEntrega(
+                    entrega
+                )
+        ).join("");
+
+}
+
+
+/* ===================================
+   MONTAR ENTREGA
+=================================== */
+
+
+function montarEntrega(
+    entrega
+){
+
+    const entregue =
+        entrega.status ===
+        "Entregue";
+
+
+    const enderecoCompleto =
+        [
+
+            entrega.endereco,
+
+            entrega.bairro,
+
+            entrega.cidade
+
+        ]
+        .filter(
+            item =>
+                item &&
+                String(item).trim()
+        )
+        .join(
+            ", "
+        );
+
+
+    const itens =
+        entrega.itens || [];
+
+
+    const produtosHTML =
+        itens.map(
+            item => `
+
+                <div class="produto">
+
+                    <strong>
+                        ${escaparHTML(
+                            item.nome ||
+                            "Produto"
+                        )}
+                    </strong>
+
+                    <span>
+
+                        ${Number(
+                            item.quantidade ||
+                            0
+                        )}
+
+                        x
+
+                        ${moeda(
+                            item.preco ||
+                            0
+                        )}
+
+                    </span>
+
+                </div>
+
+            `
+        ).join("");
+
+
+    let contatoHTML = "";
+
+
+    if(
+        entrega.telefone
+    ){
+
+        contatoHTML = `
+
+            <div class="contato">
+
+                <button
+                    class="btn-contato btn-ligar"
+                    onclick="ligarCliente(
+                        '${escaparAtributo(
+                            entrega.telefone
+                        )}'
+                    )"
+                >
+                    📞 LIGAR
+                </button>
+
+
+                <button
+                    class="btn-contato btn-mapa"
+                    onclick="abrirMapa(
+                        '${escaparAtributo(
+                            enderecoCompleto
+                        )}'
+                    )"
+                >
+                    📍 MAPA
+                </button>
+
+            </div>
+
+        `;
+
+    }else{
+
+        contatoHTML = `
+
+            <div class="contato">
+
+                <button
+                    class="btn-contato btn-mapa"
+                    style="grid-column:1/3"
+                    onclick="abrirMapa(
+                        '${escaparAtributo(
+                            enderecoCompleto
+                        )}'
+                    )"
+                >
+                    📍 ABRIR ENDEREÇO NO MAPA
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+    return `
+
+        <div class="entrega">
+
+
+            <div class="topo-entrega">
+
+
+                <div class="avatar">
+                    👤
+                </div>
+
+
+                <div class="cliente">
+
+                    <strong>
+                        ${escaparHTML(
+                            entrega.clienteNome
+                        )}
+                    </strong>
+
+                    <small>
+
+                        ${
+                            entrega.telefone
+                            ? "📞 " +
+                              escaparHTML(
+                                  entrega.telefone
+                              )
+                            : "📞 Telefone não cadastrado"
+                        }
+
+                    </small>
+
+                    <small>
+
+                        🕒
+
+                        ${formatarData(
+                            entrega.data
+                        )}
+
+                    </small>
+
+                </div>
+
+
+                <span
+                    class="status ${
+                        entregue
+                        ? "entregue"
+                        : "pendente"
+                    }"
+                >
+
+                    ${
+                        entregue
+                        ? "ENTREGUE"
+                        : "PENDENTE"
+                    }
+
+                </span>
+
+
+            </div>
+
+
+            <!-- ENDEREÇO -->
+
+            <div class="endereco">
+
+                <strong>
+                    📍 ENDEREÇO DA ENTREGA
+                </strong>
+
+                ${
+                    enderecoCompleto
+                    ? escaparHTML(
+                        enderecoCompleto
+                    )
+                    : "Endereço não cadastrado"
+                }
+
+            </div>
+
+
+            ${contatoHTML}
+
+
+            <!-- PRODUTOS -->
+
+            <div class="produtos">
+
+                ${
+                    produtosHTML ||
+                    `
+                    <div class="produto">
+                        <span>
+                            Nenhum produto informado
+                        </span>
+                    </div>
+                    `
+                }
+
+            </div>
+
+
+            <!-- TOTAL -->
+
+            <div class="total">
+
+                <small>
+                    ${escaparHTML(
+                        entrega.pagamento ||
+                        ""
+                    )}
+                </small>
+
+                <strong>
+                    ${moeda(
+                        entrega.total
+                    )}
+                </strong>
+
+            </div>
+
+
+            <!-- AÇÕES -->
+
+            <div class="acoes">
+
+                ${
+                    entregue
+
+                    ?
+
+                    `
+                    <button
+                        class="btn-reabrir"
+                        onclick="marcarPendente(
+                            '${entrega.id}'
+                        )"
+                    >
+                        ↩️ REABRIR
+                    </button>
+                    `
+
+                    :
+
+                    `
+                    <button
+                        class="btn-entregue"
+                        onclick="marcarEntregue(
+                            '${entrega.id}'
+                        )"
+                    >
+                        ✅ ENTREGUE
+                    </button>
+                    `
+                }
+
+
+                <button
+                    class="btn-excluir"
+                    onclick="excluirEntrega(
+                        '${entrega.id}'
+                    )"
+                >
+                    🗑️
+                </button>
+
+            </div>
+
+
+        </div>
+
+    `;
+
+}
+
+
+/* ===================================
+   LIGAR
+=================================== */
+
+
+function ligarCliente(
+    telefone
+){
+
+    if(
+        !telefone
+    ){
+
+        alert(
+            "Telefone não cadastrado."
+        );
+
+        return;
+
+    }
+
+
+    const numero =
+        String(
+            telefone
+        )
+        .replace(
+            /\D/g,
+            ""
+        );
+
+
+    window.location.href =
+        "tel:" +
+        numero;
+
+}
+
+
+/* ===================================
+   MAPA
+=================================== */
+
+
+function abrirMapa(
+    endereco
+){
+
+    if(
+        !endereco
+    ){
+
+        alert(
+            "Endereço não cadastrado."
+        );
+
+        return;
+
+    }
+
+
+    const url =
+        "https://www.google.com/maps/search/?api=1&query=" +
+
+        encodeURIComponent(
+            endereco
+        );
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* ===================================
+   ENTREGUE
+=================================== */
+
+
+function marcarEntregue(
+    id
+){
+
+    const entregas =
+        obterEntregas();
+
+
+    const entrega =
+        entregas.find(
+            item =>
+                String(
+                    item.id
+                ) ===
+                String(
+                    id
+                )
+        );
+
+
+    if(
+        !entrega
+    ){
+
+        return;
+
+    }
+
+
+    entrega.status =
+        "Entregue";
+
+
+    entrega.entregueEm =
+        new Date()
+        .toISOString();
+
+
+    salvarEntregas(
+        entregas
+    );
+
+
+    mostrarEntregas();
+
+}
+
+
+/* ===================================
+   REABRIR
+=================================== */
+
+
+function marcarPendente(
+    id
+){
+
+    const entregas =
+        obterEntregas();
+
+
+    const entrega =
+        entregas.find(
+            item =>
+                String(
+                    item.id
+                ) ===
+                String(
+                    id
+                )
+        );
+
+
+    if(
+        !entrega
+    ){
+
+        return;
+
+    }
+
+
+    entrega.status =
+        "Pendente";
+
+
+    delete entrega.entregueEm;
+
+
+    salvarEntregas(
+        entregas
+    );
+
+
+    mostrarEntregas();
+
+}
+
+
+/* ===================================
+   EXCLUIR
+=================================== */
+
+
+function excluirEntrega(
+    id
+){
+
+    const confirmar =
+        confirm(
+            "Deseja excluir esta entrega?"
+        );
+
+
+    if(
+        !confirmar
+    ){
+
+        return;
+
+    }
+
+
+    let entregas =
+        obterEntregas();
+
+
+    entregas =
+        entregas.filter(
+            item =>
+                String(
+                    item.id
+                ) !==
+                String(
+                    id
+                )
+        );
+
+
+    salvarEntregas(
+        entregas
+    );
+
+
+    mostrarEntregas();
+
+}
+
+
+/* ===================================
+   SEGURANÇA HTML
+=================================== */
+
+
+function escaparHTML(
+    texto
+){
+
+    return String(
+        texto || ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+function escaparAtributo(
+    texto
+){
+
+    return String(
+        texto || ""
+    )
+    .replace(
+        /\\/g,
+        "\\\\"
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    );
+
+}
+
+
+/* ===================================
+   INICIAR
+=================================== */
+
+
+mostrarEntregas();
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Relatórios - Vendedor de Água</title>
+
+<link
+    rel="stylesheet"
+    href="css/estilo.css"
+>
+
+<style>
+
+.pagina{
+    padding:18px 14px 30px;
+}
+
+.cabecalho-pagina{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.voltar{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:13px;
+    background:white;
+    font-size:25px;
+    cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.cabecalho-pagina h2{
+    font-size:21px;
+}
+
+.cabecalho-pagina p{
+    color:#64748b;
+    font-size:12px;
+    margin-top:3px;
+}
+
+
+/* FILTROS */
+
+.filtros{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:6px;
+    margin-bottom:15px;
+}
+
+.filtro{
+    border:none;
+    background:white;
+    color:#475569;
+    border-radius:10px;
+    padding:10px 4px;
+    font-size:10px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 2px 7px rgba(0,0,0,.05);
+}
+
+.filtro.ativo{
+    background:#0879d1;
+    color:white;
+}
+
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-bottom:15px;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:14px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.card small{
+    display:block;
+    color:#64748b;
+    font-size:10px;
+}
+
+.card strong{
+    display:block;
+    font-size:20px;
+    margin-top:5px;
+}
+
+.card.vendas strong{
+    color:#0879d1;
+}
+
+.card.recebido strong{
+    color:#16a34a;
+}
+
+.card.fiado strong{
+    color:#dc2626;
+}
+
+.card.entregas strong{
+    color:#ea580c;
+}
+
+
+/* RESUMO PRODUTOS */
+
+.resumo-produtos{
+    background:white;
+    border-radius:17px;
+    padding:15px;
+    margin-bottom:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.titulo-box{
+    font-weight:bold;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.linha-produto{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:9px 0;
+    border-bottom:1px solid #eef2f7;
+    font-size:11px;
+}
+
+.linha-produto:last-child{
+    border-bottom:none;
+}
+
+.linha-produto span{
+    color:#64748b;
+}
+
+
+/* VENDAS */
+
+.lista-vendas{
+    margin-top:10px;
+}
+
+.venda{
+    background:white;
+    border-radius:17px;
+    padding:14px;
+    margin-bottom:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.venda-topo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.venda-icone{
+    width:43px;
+    height:43px;
+    border-radius:13px;
+    background:#e0f2fe;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.venda-info{
+    flex:1;
+}
+
+.venda-info strong{
+    display:block;
+    font-size:14px;
+}
+
+.venda-info small{
+    display:block;
+    color:#64748b;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.venda-total{
+    text-align:right;
+}
+
+.venda-total strong{
+    display:block;
+    color:#0879d1;
+    font-size:16px;
+}
+
+.forma{
+    display:inline-block;
+    margin-top:4px;
+    padding:4px 7px;
+    border-radius:7px;
+    background:#f1f5f9;
+    color:#475569;
+    font-size:9px;
+    font-weight:bold;
+}
+
+.forma.fiado{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.forma.pix{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+
+/* DETALHES */
+
+.detalhes{
+    display:none;
+    border-top:1px solid #eef2f7;
+    margin-top:11px;
+    padding-top:10px;
+}
+
+.venda.aberta .detalhes{
+    display:block;
+}
+
+.item-venda{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:6px 0;
+    font-size:11px;
+}
+
+.item-venda span{
+    color:#64748b;
+}
+
+.botao-detalhes{
+    width:100%;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    background:#f1f5f9;
+    color:#334155;
+    padding:10px;
+    font-size:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+/* VAZIO */
+
+.vazio{
+    background:white;
+    border-radius:18px;
+    padding:40px 15px;
+    text-align:center;
+    color:#94a3b8;
+}
+
+.vazio span{
+    display:block;
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+.vazio strong{
+    color:#64748b;
+}
+
+
+/* DESKTOP */
+
+@media(min-width:600px){
+
+    .cards{
+        grid-template-columns:
+            repeat(4,1fr);
+    }
+
+}
+
+@media(max-width:360px){
+
+    .filtros{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<header class="topo">
+
+    <div class="logo">
+        💧
+    </div>
+
+    <div>
+
+        <h1>
+            Vendedor de Água
+        </h1>
+
+        <p>
+            Relatórios
+        </p>
+
+    </div>
+
+</header>
+
+
+<main class="pagina">
+
+
+<!-- CABEÇALHO -->
+
+<div class="cabecalho-pagina">
+
+    <button
+        class="voltar"
+        onclick="window.location.href='index.html'"
+    >
+        ‹
+    </button>
+
+    <div>
+
+        <h2>
+            📊 Relatórios
+        </h2>
+
+        <p>
+            Acompanhe suas vendas
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- FILTROS -->
+
+<div class="filtros">
+
+    <button
+        class="filtro ativo"
+        data-periodo="hoje"
+        onclick="selecionarPeriodo(this)"
+    >
+        HOJE
+    </button>
+
+    <button
+        class="filtro"
+        data-periodo="7"
+        onclick="selecionarPeriodo(this)"
+    >
+        7 DIAS
+    </button>
+
+    <button
+        class="filtro"
+        data-periodo="30"
+        onclick="selecionarPeriodo(this)"
+    >
+        30 DIAS
+    </button>
+
+    <button
+        class="filtro"
+        data-periodo="todos"
+        onclick="selecionarPeriodo(this)"
+    >
+        TODAS
+    </button>
+
+</div>
+
+
+<!-- CARDS -->
+
+<div class="cards">
+
+
+    <div class="card vendas">
+
+        <small>
+            VENDAS
+        </small>
+
+        <strong id="totalVendas">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+
+    <div class="card recebido">
+
+        <small>
+            RECEBIDO
+        </small>
+
+        <strong id="totalRecebido">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+
+    <div class="card fiado">
+
+        <small>
+            FIADO
+        </small>
+
+        <strong id="totalFiado">
+            R$ 0,00
+        </strong>
+
+    </div>
+
+
+    <div class="card entregas">
+
+        <small>
+            ENTREGAS
+        </small>
+
+        <strong id="totalEntregas">
+            0
+        </strong>
+
+    </div>
+
+
+</div>
+
+
+<!-- PRODUTOS -->
+
+<div class="resumo-produtos">
+
+    <div class="titulo-box">
+        📦 Produtos vendidos
+    </div>
+
+    <div id="resumoProdutos"></div>
+
+</div>
+
+
+<!-- VENDAS -->
+
+<div>
+
+    <div
+        class="titulo-box"
+        style="margin-bottom:10px;"
+    >
+        📋 Vendas
+    </div>
+
+    <div
+        id="listaVendas"
+        class="lista-vendas"
+    ></div>
+
+</div>
+
+
+</main>
+
+</div>
+
+
+<script>
+
+
+/* =========================================
+   CONFIGURAÇÃO
+========================================= */
+
+
+const CHAVE_VENDAS =
+    "vendedor_agua_vendas";
+
+
+const CHAVE_ENTREGAS =
+    "vendedor_agua_entregas";
+
+
+let periodoAtual =
+    "hoje";
+
+
+/* =========================================
+   DADOS
+========================================= */
+
+
+function obterVendas(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CHAVE_VENDAS
+            )
+        ) || [];
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function obterEntregas(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CHAVE_ENTREGAS
+            )
+        ) || [];
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================
+   MOEDA
+========================================= */
+
+
+function moeda(valor){
+
+    return Number(
+        valor || 0
+    ).toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
+
+}
+
+
+/* =========================================
+   DATA
+========================================= */
+
+
+function ehHoje(
+    data
+){
+
+    const hoje =
+        new Date();
+
+    const d =
+        new Date(
+            data
+        );
+
+
+    return (
+
+        hoje.getFullYear() ===
+        d.getFullYear()
+
+        &&
+
+        hoje.getMonth() ===
+        d.getMonth()
+
+        &&
+
+        hoje.getDate() ===
+        d.getDate()
+
+    );
+
+}
+
+
+function dentroDoPeriodo(
+    data
+){
+
+    if(
+        periodoAtual ===
+        "todos"
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        periodoAtual ===
+        "hoje"
+    ){
+
+        return ehHoje(
+            data
+        );
+
+    }
+
+
+    const dias =
+        Number(
+            periodoAtual
+        );
+
+
+    const agora =
+        new Date();
+
+
+    const limite =
+        new Date();
+
+
+    limite.setDate(
+        agora.getDate() -
+        dias
+    );
+
+
+    return (
+        new Date(
+            data
+        ) >=
+        limite
+    );
+
+}
+
+
+function formatarData(
+    data
+){
+
+    return new Date(
+        data
+    ).toLocaleString(
+        "pt-BR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =========================================
+   FILTRO
+========================================= */
+
+
+function selecionarPeriodo(
+    botao
+){
+
+    document
+        .querySelectorAll(
+            ".filtro"
+        )
+        .forEach(
+            item =>
+                item.classList.remove(
+                    "ativo"
+                )
+        );
+
+
+    botao.classList.add(
+        "ativo"
+    );
+
+
+    periodoAtual =
+        botao.dataset.periodo;
+
+
+    atualizar();
+
+}
+
+
+/* =========================================
+   VENDAS FILTRADAS
+========================================= */
+
+
+function vendasFiltradas(){
+
+    return obterVendas()
+        .filter(
+            venda =>
+                dentroDoPeriodo(
+                    venda.data
+                )
+        )
+        .sort(
+            (a,b) =>
+
+                new Date(
+                    b.data
+                )
+
+                -
+
+                new Date(
+                    a.data
+                )
+        );
+
+}
+
+
+/* =========================================
+   RESUMO
+========================================= */
+
+
+function atualizarResumo(
+    vendas
+){
+
+    let total =
+        0;
+
+    let recebido =
+        0;
+
+    let fiado =
+        0;
+
+
+    vendas.forEach(
+        venda => {
+
+            const valor =
+                Number(
+                    venda.total || 0
+                );
+
+
+            total +=
+                valor;
+
+
+            const forma =
+                String(
+                    venda.pagamento ||
+                    ""
+                )
+                .trim()
+                .toLowerCase();
+
+
+            if(
+                forma ===
+                "fiado"
+            ){
+
+                fiado +=
+                    valor;
+
+            }else{
+
+                recebido +=
+                    valor;
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "totalVendas"
+    ).textContent =
+        moeda(
+            total
+        );
+
+
+    document.getElementById(
+        "totalRecebido"
+    ).textContent =
+        moeda(
+            recebido
+        );
+
+
+    document.getElementById(
+        "totalFiado"
+    ).textContent =
+        moeda(
+            fiado
+        );
+
+
+    const entregas =
+        obterEntregas()
+        .filter(
+            entrega =>
+                dentroDoPeriodo(
+                    entrega.data
+                )
+        );
+
+
+    document.getElementById(
+        "totalEntregas"
+    ).textContent =
+        entregas.length;
+
+}
+
+
+/* =========================================
+   RESUMO DOS PRODUTOS
+========================================= */
+
+
+function atualizarProdutos(
+    vendas
+){
+
+    const produtos = {};
+
+
+    vendas.forEach(
+        venda => {
+
+            const itens =
+                venda.itens ||
+                [];
+
+
+            itens.forEach(
+                item => {
+
+                    const nome =
+                        item.nome ||
+                        "Produto";
+
+
+                    if(
+                        !produtos[nome]
+                    ){
+
+                        produtos[nome] = 0;
+
+                    }
+
+
+                    produtos[nome] +=
+                        Number(
+                            item.quantidade ||
+                            0
+                        );
+
+                }
+            );
+
+        }
+    );
+
+
+    const lista =
+        Object.entries(
+            produtos
+        )
+        .sort(
+            (a,b) =>
+                b[1] - a[1]
+        );
+
+
+    const container =
+        document.getElementById(
+            "resumoProdutos"
+        );
+
+
+    if(
+        lista.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div
+                style="
+                    color:#94a3b8;
+                    font-size:11px;
+                    padding:8px 0;
+                "
+            >
+                Nenhum produto vendido
+                no período.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+
+        lista.map(
+            produto => `
+
+                <div class="linha-produto">
+
+                    <strong>
+                        ${escaparHTML(
+                            produto[0]
+                        )}
+                    </strong>
+
+                    <span>
+
+                        ${produto[1]}
+
+                        ${
+                            produto[1] === 1
+                            ? "unidade"
+                            : "unidades"
+                        }
+
+                    </span>
+
+                </div>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* =========================================
+   LISTA DE VENDAS
+========================================= */
+
+
+function mostrarVendas(
+    vendas
+){
+
+    const container =
+        document.getElementById(
+            "listaVendas"
+        );
+
+
+    if(
+        vendas.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="vazio">
+
+                <span>
+                    📊
+                </span>
+
+                <strong>
+                    Nenhuma venda encontrada
+                </strong>
+
+                <p
+                    style="
+                        margin-top:7px;
+                        font-size:12px;
+                    "
+                >
+                    Não existem vendas
+                    neste período.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+
+        vendas.map(
+            (venda,index) => {
+
+                const forma =
+                    String(
+                        venda.pagamento ||
+                        "Não informado"
+                    );
+
+
+                const classeForma =
+                    forma
+                        .toLowerCase()
+                        .includes(
+                            "fiado"
+                        )
+                        ? "fiado"
+
+                        :
+
+                        forma
+                            .toLowerCase()
+                            .includes(
+                                "pix"
+                            )
+                            ? "pix"
+
+                            :
+                            "";
+
+
+                const itens =
+                    venda.itens ||
+                    [];
+
+
+                const itensHTML =
+                    itens.map(
+                        item => `
+
+                            <div class="item-venda">
+
+                                <strong>
+
+                                    ${escaparHTML(
+                                        item.nome ||
+                                        "Produto"
+                                    )}
+
+                                </strong>
+
+                                <span>
+
+                                    ${Number(
+                                        item.quantidade ||
+                                        0
+                                    )}
+
+                                    x
+
+                                    ${moeda(
+                                        item.preco ||
+                                        0
+                                    )}
+
+                                </span>
+
+                            </div>
+
+                        `
+                    )
+                    .join("");
+
+
+                return `
+
+                    <div
+                        class="venda"
+                        id="venda-${index}"
+                    >
+
+
+                        <div
+                            class="venda-topo"
+                        >
+
+
+                            <div
+                                class="venda-icone"
+                            >
+                                🛒
+                            </div>
+
+
+                            <div
+                                class="venda-info"
+                            >
+
+                                <strong>
+
+                                    ${
+                                        escaparHTML(
+                                            venda.clienteNome ||
+                                            "Cliente"
+                                        )
+                                    }
+
+                                </strong>
+
+                                <small>
+
+                                    ${formatarData(
+                                        venda.data
+                                    )}
+
+                                </small>
+
+                                <span
+                                    class="forma ${classeForma}"
+                                >
+
+                                    ${escaparHTML(
+                                        forma
+                                    )}
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="venda-total"
+                            >
+
+                                <strong>
+
+                                    ${moeda(
+                                        venda.total
+                                    )}
+
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="detalhes">
+
+                            ${itensHTML}
+
+
+                            <div
+                                style="
+                                    border-top:1px solid #eef2f7;
+                                    margin-top:7px;
+                                    padding-top:8px;
+                                    font-size:11px;
+                                    color:#64748b;
+                                "
+                            >
+
+                                Total da venda:
+
+                                <strong
+                                    style="
+                                        color:#0879d1;
+                                    "
+                                >
+
+                                    ${moeda(
+                                        venda.total
+                                    )}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="botao-detalhes"
+                            onclick="alternarVenda(
+                                ${index}
+                            )"
+                        >
+
+                            👁️ Ver detalhes
+
+                        </button>
+
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================================
+   ABRIR / FECHAR VENDA
+========================================= */
+
+
+function alternarVenda(
+    index
+){
+
+    const elemento =
+        document.getElementById(
+            "venda-" +
+            index
+        );
+
+
+    if(
+        !elemento
+    ){
+
+        return;
+
+    }
+
+
+    elemento.classList.toggle(
+        "aberta"
+    );
+
+
+    const botao =
+        elemento.querySelector(
+            ".botao-detalhes"
+        );
+
+
+    if(
+        elemento.classList.contains(
+            "aberta"
+        )
+    ){
+
+        botao.textContent =
+            "🔼 Fechar detalhes";
+
+    }else{
+
+        botao.textContent =
+            "👁️ Ver detalhes";
+
+    }
+
+}
+
+
+/* =========================================
+   SEGURANÇA
+========================================= */
+
+
+function escaparHTML(
+    texto
+){
+
+    return String(
+        texto || ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================
+   ATUALIZAR
+========================================= */
+
+
+function atualizar(){
+
+    const vendas =
+        vendasFiltradas();
+
+
+    atualizarResumo(
+        vendas
+    );
+
+
+    atualizarProdutos(
+        vendas
+    );
+
+
+    mostrarVendas(
+        vendas
+    );
+
+}
+
+
+/* =========================================
+   INICIAR
+========================================= */
+
+
+atualizar();
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Vendedor de Água</title>
+
+    <!-- PWA -->
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0879d1"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/estilo.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- CABEÇALHO -->
+
+    <header class="topo">
+
+        <div class="logo">
+            💧
+        </div>
+
+        <div>
+
+            <h1>
+                Vendedor de Água
+            </h1>
+
+            <p>
+                Controle de vendas e entregas
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- RESUMO -->
+
+    <section class="resumo">
+
+
+        <div class="card">
+
+            <span>
+                💰
+            </span>
+
+            <div>
+
+                <small>
+                    Vendas hoje
+                </small>
+
+                <strong>
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <span>
+                📋
+            </span>
+
+            <div>
+
+                <small>
+                    Fiado
+                </small>
+
+                <strong>
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <span>
+                🚚
+            </span>
+
+            <div>
+
+                <small>
+                    Entregas
+                </small>
+
+                <strong>
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <span>
+                📦
+            </span>
+
+            <div>
+
+                <small>
+                    Estoque
+                </small>
+
+                <strong>
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- NOVA VENDA -->
+
+    <button
+        class="botao-venda"
+        onclick="window.location.href='venda.html'"
+    >
+
+        <span>
+            💧
+        </span>
+
+        <div>
+
+            <strong>
+                NOVA VENDA
+            </strong>
+
+            <small>
+                Registrar uma nova venda
+            </small>
+
+        </div>
+
+        <b>
+            ›
+        </b>
+
+    </button>
+
+
+    <!-- MENU -->
+
+    <section class="menu">
+
+
+        <!-- CLIENTES -->
+
+        <button
+            class="menu-item"
+            onclick="window.location.href='clientes.html'"
+        >
+
+            <span class="icone azul">
+                👥
+            </span>
+
+            <div>
+
+                <strong>
+                    Clientes
+                </strong>
+
+                <small>
+                    Cadastrar e consultar clientes
+                </small>
+
+            </div>
+
+            <b>
+                ›
+            </b>
+
+        </button>
+
+
+        <!-- ENTREGAS -->
+
+        <button
+            class="menu-item"
+            onclick="window.location.href='entregas.html'"
+        >
+
+            <span class="icone verde">
+                🚚
+            </span>
+
+            <div>
+
+                <strong>
+                    Entregas
+                </strong>
+
+                <small>
+                    Controlar entregas
+                </small>
+
+            </div>
+
+            <b>
+                ›
+            </b>
+
+        </button>
+
+
+        <!-- PRODUTOS -->
+
+        <button
+            class="menu-item"
+            onclick="window.location.href='produtos.html'"
+        >
+
+            <span class="icone laranja">
+                📦
+            </span>
+
+            <div>
+
+                <strong>
+                    Produtos
+                </strong>
+
+                <small>
+                    Águas e outros produtos
+                </small>
+
+            </div>
+
+            <b>
+                ›
+            </b>
+
+        </button>
+
+
+        <!-- FIADO -->
+
+        <button
+            class="menu-item"
+            onclick="window.location.href='fiado.html'"
+        >
+
+            <span class="icone vermelho">
+                💳
+            </span>
+
+            <div>
+
+                <strong>
+                    Fiado
+                </strong>
+
+                <small>
+                    Contas a receber
+                </small>
+
+            </div>
+
+            <b>
+                ›
+            </b>
+
+        </button>
+
+
+        <!-- CAIXA -->
+
+        <button
+            class="menu-item"
+            onclick="window.location.href='caixa.html'"
+        >
+
+            <span class="icone roxo">
+                💰
+            </span>
+
+            <div>
+
+                <strong>
+                    Caixa
+                </strong>
+
+                <small>
+                    Entradas e saídas
+                </small>
+
+            </div>
+
+            <b>
+                ›
+            </b>
+
+        </button>
+
+
+        <!-- RELATÓRIOS -->
+
+        <button
+            class="menu-item"
+            onclick="window.location.href='relatorios.html'"
+        >
+
+            <span class="icone cinza">
+                📊
+            </span>
+
+            <div>
+
+                <strong>
+                    Relatórios
+                </strong>
+
+                <small>
+                    Vendas e resultados
+                </small>
+
+            </div>
+
+            <b>
+                ›
+            </b>
+
+        </button>
+
+
+    </section>
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        Desenvolvedor - Gildásio
+
+    </footer>
+
+
+</div>
+
+
+<!-- SERVICE WORKER -->
+
+<script>
+
+if (
+    "serviceWorker" in navigator
+) {
+
+    window.addEventListener(
+        "load",
+        function() {
+
+            navigator.serviceWorker
+                .register(
+                    "service-worker.js"
+                )
+
+                .then(
+                    function(registro) {
+
+                        console.log(
+                            "Vendedor de Água: aplicativo pronto.",
+                            registro
+                        );
+
+                    }
+                )
+
+                .catch(
+                    function(erro) {
+
+                        console.error(
+                            "Erro ao registrar o aplicativo:",
+                            erro
+                        );
+
+                    }
+                );
+
+        }
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
